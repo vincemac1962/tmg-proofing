@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Mail;
+
+use AllowDynamicProperties;
+use Illuminate\Mail\Mailable;
+
+#[AllowDynamicProperties] class CustomerLoginMail extends Mailable
+{
+    public $contract_reference;
+    public $recipient_name;
+    public $recipient_email;
+    public $recipient_password;
+    public $proofingCompany;
+    public $advert_location;
+    public $company_name;
+    public $loginId;
+    public $password;
+    public $login_url;
+    public $subject;
+
+    public function __construct($data)
+    {
+        $this->contract_reference = $data['contract_reference'] ?? null;
+        $this->recipient_name = $data['recipient_name'] ?? null;
+        $this->recipient_email = $data['recipient_email'] ?? null;
+        $this->recipient_password = $data['recipient_password'] ?? null;
+        $this->proofingCompany = $data['proofingCompany'] ?? null;
+        $this->advert_location = $data['advert_location'] ?? null;
+        $this->company_name = $data['company_name'] ?? null;
+        $this->loginId = $data['recipient_email'] ?? null;
+        $this->login_url = config('app.base_login_url') . '?proofing_company=' . ($this->proofingCompany ? $this->proofingCompany->id : '');
+        $this->subject = 'Your Proofing Login Details';
+        $this->notes = $data['notes'] ?? null;
+        // Ensure all required fields are set
+        if (empty($this->recipient_name) || empty($this->proofingCompany) || empty($this->loginId) || empty($this->recipient_password)) {
+            throw new \InvalidArgumentException('Missing required data for CustomerLoginMail');
+        }
+        // Ensure proofingCompany has an email address
+        if (empty($this->proofingCompany->email_address)) {
+            throw new \InvalidArgumentException('Proofing company must have an email address');
+        }
+    }
+
+    public function build()
+    {
+        return $this->view('emails.customer_login')
+            ->text('emails.customer_login_plain')
+            ->replyTo($this->proofingCompany->email_address)
+            ->subject('Your Login Details');
+    }
+}

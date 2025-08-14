@@ -1,0 +1,1 @@
+<p>This is a test email to verify your mail settings.</p>
