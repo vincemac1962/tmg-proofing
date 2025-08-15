@@ -20,7 +20,7 @@ class ProofingCompanySeeder extends Seeder
                 'web_url' => 'www.tradeconnect.ca',
                 'email_signatory' => 'Hannah Dunn',
                 'signatory_role' => 'Graphics Administrator',
-                'company_logo_url' => 'trade_connect.svg',
+                'company_logo_url' => 'http://www.time-cdn.co.uk/svg/trade_connect.svg',
                 'colour_split' => 'rgb(252, 98, 0)',
             ],
             [
@@ -33,7 +33,7 @@ class ProofingCompanySeeder extends Seeder
                 'web_url' => 'www.instore-connect.com',
                 'email_signatory' => 'Hannah Dunn',
                 'signatory_role' => 'Graphics Administrator',
-                'company_logo_url' => 'instore_connect.svg',
+                'company_logo_url' => 'http://www.time-cdn.co.uk/svg/instore_connect.svg',
                 'colour_split' => 'rgb(21, 168, 223)',
             ],
             [
@@ -46,7 +46,7 @@ class ProofingCompanySeeder extends Seeder
                 'web_url' => 'www.livestockmedia.tv',
                 'email_signatory' => 'Hannah Dunn',
                 'signatory_role' => 'Graphics Administrator',
-                'company_logo_url' => 'livestock_media.svg',
+                'company_logo_url' => 'http://www.time-cdn.co.uk/svg/livestock_media.svg',
                 'colour_split' => 'rgb(112, 80, 47)',
             ],
             [
@@ -59,7 +59,7 @@ class ProofingCompanySeeder extends Seeder
                 'web_url' => 'www.community-connects.com',
                 'email_signatory' => 'Hannah Dunn',
                 'signatory_role' => 'Graphics Administrator',
-                'company_logo_url' => 'community_connect.svg',
+                'company_logo_url' => 'http://www.time-cdn.co.uk/svg/community_connect.svg',
                 'colour_split' => 'rgb(153, 204, 83)',
             ],
             [
@@ -72,7 +72,7 @@ class ProofingCompanySeeder extends Seeder
                 'web_url' => 'www.propertyconnectglobal.com',
                 'email_signatory' => 'Hannah Dunn',
                 'signatory_role' => 'Graphics Administrator',
-                'company_logo_url' => 'property_connect.svg',
+                'company_logo_url' => 'http://www.time-cdn.co.uk/svg/property_connect.svg',
                 'colour_split' => 'rgb(235, 28, 115)',
             ],
         ];
