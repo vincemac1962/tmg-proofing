@@ -46,7 +46,7 @@
     </div>
     <div class="md:col-span-2 mb-2">
         <label for="website" class="block text-sm font-medium text-gray-700 mb-1">
-            Tel:
+            URL
         </label>
         <div id="website" class="col-span-2 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
             {{ $proofingCompany->web_url }}
@@ -54,7 +54,7 @@
     </div>
     <div class="md:col-span-2 mb-2">
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-            Tel:
+            Contact Email Address:
         </label>
         <div id="email" class="col-span-2 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
             {{ $proofingCompany->email_address }}
@@ -81,7 +81,7 @@
     <!-- fifth row -->
     <div class="md:col-span-2 mb-2">
         <label for="logo_url" class="block text-sm font-medium text-gray-700 mb-1">
-            Signatory
+            Company Logo URL
         </label>
         <div id="logo_url" class="col-span-2 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
             {{ $proofingCompany->company_logo_url }}

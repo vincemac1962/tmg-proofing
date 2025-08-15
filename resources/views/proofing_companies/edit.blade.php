@@ -14,7 +14,7 @@
             <!-- first row -->
             <div class="mb-2 col-span-2">
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-                    Name
+                    Company Name
                 </label>
                 <input
                         type="text"
@@ -28,7 +28,7 @@
 
             <div class="md:col-span-4 mb-2">
                 <label for="address" class="block text-sm font-medium text-gray-700 mb-1">
-                    Company Name
+                    Postal Address
                 </label>
                 <input
                         type="text"
