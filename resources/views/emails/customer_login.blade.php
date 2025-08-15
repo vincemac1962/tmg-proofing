@@ -53,6 +53,7 @@
 <body>
 <div class="content" style="width: 80%; max-width: 80%; min-height: 50%; background-color: #F5F5F5; margin: 0 auto; padding: 20px; text-align: center; border-radius: 16px;">
         <div class="header-image">
+            <!-- ToDo : create bas64 image for the logo -->
             <img src="{{ $proofingCompany->company_logo_url }}" alt="Company Logo" style="max-width: 150px;">
         </div>
         <div class="body-container">

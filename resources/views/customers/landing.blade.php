@@ -10,7 +10,7 @@
 <body class="bg-gray-50">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-center items-center mb-8">
-        <img src="{{ session('company_logo_url') }}" alt="Company Logo" class="h-16 w-auto">
+        <img src="{{ $proofingCompany->company_logo_url }}" alt="Company Logo" class="h-16 w-auto">
     </div>
 
     <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
@@ -19,7 +19,7 @@
 
     @foreach ($customers as $customer)
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <div class="text-gray-600 text-sm mb-4"><strong>Company Name</strong>: {{ $customer->company_name }}</div>
+            <div class="text-gray-600 mb-4"><strong>Company Name</strong>: {{ $customer->company_name }}</div>
             <div class="text-gray-600 mb-4"><strong>City</strong>: {{ $customer->customer_city }}</div>
 
             <h3 class="text-xl font-semibold text-gray-900 mb-4">Proofing Jobs</h3>

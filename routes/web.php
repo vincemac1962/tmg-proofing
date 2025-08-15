@@ -22,20 +22,22 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-/*Route::middleware(['auth', CheckUserRole::class])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
-    Route::get('/customers-landing', [CustomerController::class, 'landing'])->name('customers.landing');
-}); */
 
 // Admin, Super Admin, and Designer routes
 Route::middleware(['auth'])->group(function () {
 
-Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+   // Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+
+    // Route::get('/customers-landing', [CustomerController::class, 'landing'])->name('customers.landing');
+
+    Route::middleware(['auth', 'redirectBasedOnRole'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+
+        Route::get('/customers-landing', [CustomerController::class, 'landing'])->name('customers.landing');
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

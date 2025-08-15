@@ -97,5 +97,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // Other middleware
         'log.route' => \App\Http\Middleware\LogRouteMiddleware::class,
+        'redirectBasedOnRole' => \App\Http\Middleware\RedirectBasedOnRole::class,
     ];
 }

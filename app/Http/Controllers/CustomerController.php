@@ -192,9 +192,20 @@ class CustomerController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        $customers = $user->customers()->with('proofingJobs')->get();
+        $customers = $user->customers()->with('proofingJobs.proofingCompany')->get();
 
-        return view('customers.landing', compact('user', 'customers'));
+        // Retrieve the proofing company for the highest proofing_company_id
+        $proofingCompany = null;
+        foreach ($customers as $customer) {
+            foreach ($customer->proofingJobs as $proofingJob) {
+                $currentCompany = $proofingJob->proofingCompany;
+                if ($proofingCompany === null || ($currentCompany && $currentCompany->id > $proofingCompany->id)) {
+                    $proofingCompany = $currentCompany;
+                }
+            }
+        }
+
+        return view('customers.landing', compact('user', 'customers', 'proofingCompany'));
     }
 
     public function viewProof($id)
@@ -206,7 +217,7 @@ class CustomerController extends Controller
             abort(404, 'No proof found for the given job.');
         }
 
-        $proofingJob = ProofingJob::with('customer')->findOrFail($id);
+        $proofingJob = ProofingJob::with('customer', 'proofingCompany')->findOrFail($id);
 
         $videoDimensions = null;
 
@@ -235,7 +246,9 @@ class CustomerController extends Controller
             'notes' => null,
         ]);
 
-        return view('customers.view_proof', compact('proofingJob', 'latestProof', 'videoDimensions'));
+        $proofingCompany = $proofingJob->proofingCompany;
+
+        return view('customers.view_proof', compact('proofingJob',  'proofingCompany','latestProof', 'videoDimensions'));
     }
 
     public function submitAmendment(Request $request)
