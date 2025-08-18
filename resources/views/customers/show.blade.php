@@ -109,17 +109,29 @@
             </a>
         </div>
         <div class="col-span-2 flex justify-center items-center">
-            <!-- send amendment -->
-            <a href="{{ route('proofs.create', ['jobId' => $job->id, 'customerId' => $customer->id, 'proof_type' => 'proof uploaded']) }}" class="text-blue-800 hover:text-blue-600 pl-5">
-                Send Proof
-            </a>
+            @if(!$customer->proofingJobs->isEmpty())
+                <!-- send proof -->
+                <a href="{{ route('proofs.create', ['jobId' => $customer->proofingJobs->first()->id, 'customerId' => $customer->id, 'proof_type' => 'proof uploaded']) }}" class="text-blue-800 hover:text-blue-600 pl-5">
+                    Send Proof
+                </a>
+            @else
+                <span class="text-gray-400 pl-5">
+            Send Proof
+        </span>
+            @endif
         </div>
 
         <div class="col-span-2 flex justify-center items-center">
-            <!-- send amendment -->
-            <a href="{{ route('proofs.create', ['jobId' => $job->id, 'customerId' => $customer->id, 'proof_type' => 'amended']) }}" class="text-blue-800 hover:text-blue-600 pl-5">
-                Send Amendment
-            </a>
+            @if(!$customer->proofingJobs->isEmpty())
+                <!-- send amendment -->
+                <a href="{{ route('proofs.create', ['jobId' => $customer->proofingJobs->first()->id, 'customerId' => $customer->id, 'proof_type' => 'amended']) }}" class="text-blue-800 hover:text-blue-600 pl-5">
+                    Send Amendment
+                </a>
+            @else
+                <span class="text-gray-400 pl-5">
+            Send Amendment
+        </span>
+            @endif
         </div>
     </div>
 @endsection

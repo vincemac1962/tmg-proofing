@@ -47,8 +47,9 @@ class ReminderController extends Controller
             ['path' => $request->url(), 'query' => $request->query()] // Pagination links
         );
 
+        //ToDo:
         // Generate a CSV file from the query results
-        $csvFilePath = $this->generateCsv($query);
+       //$csvFilePath = $this->generateCsv($query);
 
         // Return the view with reminders, filters, sorting, and the CSV download link
         return view('reminders.index', [
