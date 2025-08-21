@@ -10,14 +10,22 @@
         <div class="flex flex-row items-center mt-4 space-x-6">
             <!-- Date Range Pickers -->
             <div class="flex space-x-2">
-                <x-text-input
-                        type="date"
-                        id="start_date"
-                        name="start_date"
-                        value="{{ request('start_date') }}"
-                        class="w-40"
-                />
+                <div class="relative">
+                    <x-text-input
+                            type="date"
+                            id="start_date"
+                            name="start_date"
+                            value="{{ request('start_date') }}"
+                            class="w-40"
+                    />
+                    <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 11h14M5 15h14M5 19h14M5 7h14" />
+                        </svg>
+                    </span>
+                </div>
                 <span class="text-gray-500">to</span>
+                <div class="relative">
                 <x-text-input
                         type="date"
                         id="end_date"
@@ -25,6 +33,12 @@
                         value="{{ request('end_date') }}"
                         class="w-40"
                 />
+                <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 11h14M5 15h14M5 19h14M5 7h14" />
+                        </svg>
+                    </span>
+                </div>
             </div>
 
             <!-- Country Dropdown -->
