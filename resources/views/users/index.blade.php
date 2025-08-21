@@ -25,7 +25,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('role')">
                     <x-slot name="trigger">
-            <span class="py-1 bg-white dark:bg-gray-700 text-lg text-blue-800 hover:text-blue-400 leading-5">
+            <span class="py-1 text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 leading-5">
                 {{ ucfirst(request('role', __('Filter by Role'))) }}
             </span>
                     </x-slot>
@@ -51,7 +51,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('perPage')">
                     <x-slot name="trigger">
-                        <span class="py-1 bg-white dark:bg-gray-700 text-lg text-blue-800 hover:text-blue-400 leading-5">
+                        <span class="py-1 text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 leading-5">
                             {{ request('perPage', 25) }} {{ __('Records per Page') }}
                         </span>
                     </x-slot>
@@ -75,7 +75,7 @@
 
         <!-- Filter and Reset Buttons -->
         <div class="flex flex-row items-center mt-4 space-x-2">
-            <button type="submit" class="text-blue-800 hover:text-blue-600">
+            <button type="submit" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
                 Apply Filters
             </button>
             <a href="{{ route('users.index') }}" class="text-red-800 hover:text-red-600 pl-5">
@@ -88,7 +88,7 @@
 
     <table class="w-full border-collapse mt-16 mx-auto">
         <thead>
-        <tr class="bg-lime-800 dark:bg-gray-800 text-white dark:text-gray-300">
+        <tr class="bg-lime-800 dark:bg-lime-800 text-white dark:text-gray-300">
             <th class="py-2 px-4">ID</th>
             <th class="py-2 px-4 sortable" data-sort="name">
                 Name
@@ -114,21 +114,16 @@
                     {{ request('order') === 'asc' ? '▲' : '▼' }}
                 @endif
             </th>
-            <th>Action</th>
-
         </tr>
         </thead>
         <tbody>
         @foreach ($users as $user)
-            <tr class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-center">
-                <td class="py-2 px-4 border-b"><a href="{{ route('users.show', $user->id) }}">{{ $user->id }}</a></td>
+            <tr class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-center" onclick="window.location='{{ route('users.show', $user->id) }}'">
+                <td class="py-2 px-4 border-b">{{ $user->id }}</td>
                 <td class="py-2 px-4 border-b">{{ $user->name }}</td>
                 <td class="py-2 px-4 border-b">{{ $user->email }}</td>
                 <td class="py-2 px-4 border-b">{{ $user->role }}</td>
                 <td class="py-2 px-4 border-b">{{ $user->is_active ? 'true' : 'false' }}</td>
-                <td class="py-2 px-4 border-b">
-                    <a href="{{ route('users.edit', $user->id) }}">Edit</a>
-                </td>
             </tr>
         @endforeach
         </tbody>

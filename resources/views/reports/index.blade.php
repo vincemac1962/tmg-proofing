@@ -6,10 +6,10 @@
     </x-section-heading>
 
     @foreach ($reports as $category => $group)
-        <div class="text-xl my-3">{{ $category }}</div>
+        <div class="text-xl my-3 text-gray-900 dark:text-gray-100">{{ $category }}</div>
         <ul>
             @foreach ($group as $report)
-                <div class="mb-3"><a class="text-blue-800 hover:text-blue-600" href="{{ route('reports.view', ['id' => $report->id, 'report_name' => $report->report_name] ) }}">{{ $report->report_name }}</a></div>
+                <div class="mb-3"><a class="text-blue-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-gray-400 pl-5" href="{{ route('reports.view', ['id' => $report->id, 'report_name' => $report->report_name] ) }}">{{ $report->report_name }}</a></div>
             @endforeach
         </ul>
     @endforeach

@@ -14,51 +14,51 @@
         <div class="grid grid-cols-4 gap-4 pt-5 w-1/2">
             <!-- first row -->
            <div class="md:col-span-2 mb-2">
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     Name
                 </label>
                 <input
                         type="text"
                         id="name"
                         name="name"
-                        class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         value="{{ old('name', $user->name) }}"
                         required
                 />
             </div>
             <div class="md:col-span-2 mb-2">
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     Email
                 </label>
                 <input
                         type="email"
                         id="email"
                         name="email"
-                        class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         value="{{ old('email', $user->email) }}"
                         required
                 />
             </div>
             <!-- second row -->
             <div class="md:col-span-4 mb-2">
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     Password
                 </label>
                 <input
                         type="text"
                         id="password"
                         name="password"
-                        class="w-1/2 col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="w-1/2 col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         placeholder="Leave blank to keep current password"
                 />
-                <button type="button" onclick="openModal()" class="text-blue-600 hover:text-blue-500 mt-2">
+                <button type="button" onclick="openModal()" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 mt-2">
                     &nbsp;&nbsp;Generate Password
                 </button>
             </div>
         <!-- third row -->
         <div class="md:col-span-2 mb-2">
-            <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role:</label>
-            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="role" name="role" required>
+            <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Role:</label>
+            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 text-gray-900 dark:text-gray-100" id="role" name="role" required>
                 <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                 <option value="customer" {{ $user->role == 'customer' ? 'selected' : '' }}>Customer</option>
                 <option value="designer" {{ $user->role == 'designer' ? 'selected' : '' }}>Designer</option>
@@ -66,7 +66,7 @@
             </select>
         </div>
             <div class="md:col-span-1 mb-2 items-center text-center">
-                <label for="is_active" class="block text-sm font-medium text-gray-700 mb-1">Active?:</label>
+                <label for="is_active" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Active?:</label>
                 <!-- Hidden input to send false value -->
                 <input type="hidden" name="is_active" value="0">
                 <!-- Checkbox to send true value -->
@@ -76,10 +76,10 @@
         </div>
         <div class="col-span-4 w-1/2">
             <div class="flex justify-between items-center w-full py-5">
-                <a href="{{ route('users.index') }}" class="text-blue-800 hover:text-blue-600">
+                <a href="{{ route('users.index') }}" class="text-red-800 hover:text-red-600">
                     Cancel
                 </a>
-                <button type="submit" class="text-blue-800 hover:text-blue-600">
+                <button type="submit" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
                     Save
                 </button>
                 <form action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">

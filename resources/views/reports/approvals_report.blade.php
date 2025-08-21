@@ -35,7 +35,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('country')">
                     <x-slot name="trigger">
-                        <span class="py-1 bg-white dark:bg-gray-700 text-blue-800 hover:text-blue-400 text-lg leading-5">
+                        <span class="py-1 bg-white dark:bg-gray-800 text-blue-800  hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
                             {{ request('country', __('Filter by Country')) }}
                         </span>
                     </x-slot>
@@ -56,7 +56,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('proofing_company')">
                     <x-slot name="trigger">
-                        <span class="py-1 bg-white dark:bg-gray-700 text-blue-800 hover:text-blue-400 text-lg leading-5">
+                        <span class="py-1 bg-white dark:bg-gray-800 text-blue-800  hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
                             {{ request('proofing_company', __('Filter by Proofing Company')) }}
                         </span>
                     </x-slot>
@@ -77,7 +77,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('perPage')">
                     <x-slot name="trigger">
-                        <span class="py-1 bg-white dark:bg-gray-700 text-lg text-blue-800 hover:text-blue-400 leading-5">
+                        <span class="py-1 bg-white dark:bg-gray-800 text-blue-800  hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
                             {{ request('perPage', 25) }} {{ __('Records per Page') }}
                         </span>
                     </x-slot>
@@ -101,7 +101,7 @@
 
         <!-- Filter and Reset Buttons -->
         <div class="flex flex-row items-center mt-4 space-x-2">
-            <button type="submit" class="text-blue-800 hover:text-blue-600">
+            <button type="submit" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5">
                 Apply Filters
             </button>
             <a href="{{ route('reports.approvals_report') }}" class="text-red-800 hover:text-red-600 pl-5">
@@ -111,17 +111,21 @@
     </form>
 
     <!-- Displaying the chosen dates -->
-    <p>Showing records between  {{ $startDate }} and {{ $endDate }}</p>
+    <p class="text-gray-900 dark:text-gray-100">Showing records between  {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} and {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+
+    <div class="grid grid-cols-2 gap-4 mt-4">
+
+     <div class="col-span-2">
 
         <!-- Report Content -->
     @if($approvals->isNotEmpty())
-        <table class="w-full border-collapse mt-16 mx-auto">
+        <table class="w-full border-collapse mt-5 mx-auto">
             <thead>
-            <tr class="bg-emerald-900 dark:bg-gray-800 text-white dark:text-gray-300">
+            <tr class="bg-emerald-900 dark:bg-emerald-900 text-gray-300">
                 <th class="py-2 px-4 text-left">ID</th>
                 <th class="py-2 px-4 text-center" data-sort="amendment_date">
                     <a href="{{ route('reports.approvals_report', array_merge(request()->all(), ['sort_by' => 'approval_date', 'sort_order' => request('sort_order') === 'asc' ? 'desc' : 'asc'])) }}">
-                        Date Submitted
+                        Date
                         @if(request('sort_by') === 'approval_date')
                             @if(request('sort_order') === 'asc')
                                 &#9650; <!-- Up arrow for ascending -->
@@ -133,7 +137,7 @@
                 </th>
                 <th class="sortable py-2 px-4 text-left whitespace-nowrap" data-sort="contract_reference">
                     <a href="{{ route('reports.approvals_report', array_merge(request()->all(), ['sort_by' => 'contract_reference', 'sort_order' => request('sort_order') === 'asc' ? 'desc' : 'asc'])) }}">
-                        Contract Reference
+                        C/N
                         @if(request('sort_by') === 'contract_reference')
                             @if(request('sort_order') === 'asc')
                                 &#9650; <!-- Up arrow for ascending -->
@@ -169,7 +173,7 @@
                 </th>
                 <th class="sortable py-2 px-4 text-left whitespace-nowrap" data-sort="customer_country">
                     <a href="{{ route('reports.approvals_report', array_merge(request()->all(), ['sort_by' => 'customer_country', 'sort_order' => request('sort_order') === 'asc' ? 'desc' : 'asc'])) }}">
-                        Customer Country
+                        Country
                         @if(request('sort_by') === 'customer_country')
                             @if(request('sort_order') === 'asc')
                                 &#9650; <!-- Up arrow for ascending -->
@@ -181,7 +185,7 @@
                 </th>
                 <th class="sortable py-2 px-4 text-left whitespace-nowrap" data-sort="proofing_company_name">
                     <a href="{{ route('reports.approvals_report', array_merge(request()->all(), ['sort_by' => 'proofing_company_name', 'sort_order' => request('sort_order') === 'asc' ? 'desc' : 'asc'])) }}">
-                        Proofing Company
+                        Proofing Co.
                         @if(request('sort_by') === 'proofing_company_name')
                             @if(request('sort_order') === 'asc')
                                 &#9650; <!-- Up arrow for ascending -->
@@ -210,7 +214,7 @@
                 <tr class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
 
                     <td class="py-2 px-4 border-b">{{ $approval->id }}</td>
-                    <td class="py-2 px-4 border-b text-center">{{ $approval->approval_date }}</td>
+                    <td class="py-2 px-4 border-b text-center">{{ \Carbon\Carbon::parse($approval->approval_date)->format('d-m-Y H:i') }}</td>
                     <td class="py-2 px-4 border-b">{{ $approval->contract_reference }}</td>
                     <td class="py-2 px-4 border-b">{{ $approval->approved_by }}</td>
                     <td class="py-2 px-4 border-b">{{ $approval->customer_name }}</td>
@@ -221,27 +225,26 @@
             @endforeach
             </tbody>
         </table>
-        <div class="grid grid-cols-2 py-4 w-full">
+    </div>
             <div class="col-span-1 text-center">
                 <button class="btn btn-primary text-red-800 hover:text-red-600" onclick="history.back()">Back</button>
             </div>
             <div class="col-span-1 text-center">
-                <button class="btn btn-primary text-blue-800 hover:text-blue-600">
+                <button class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5">
                     <a href="{{ route('reports.download', $report->report_view) }}"> Generate and Download CSV</a>
                 </button>
             </div>
-
+        <div class="col-span-2 flex justify-center">
+                {{ $approvals->links() }}
         </div>
-
+    </div>
     @else
         <div class="text-center mt-4">
             <p class="text-gray-500">No amendments found for the selected date range.</p>
         </div>
     @endif
 
-    <div class="d-flex justify-content-center">
-        {{ $approvals->links() }}
-    </div>
+
 @endsection
 
 @push('scripts')

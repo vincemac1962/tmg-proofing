@@ -6,7 +6,7 @@
     </x-section-heading>
     <div class="py-2">
         <form method="GET" action="{{ route('designers.index') }}" class="flex flex-row items-center space-x-2">
-            <label for="role" class="text-lg font-medium text-gray-700">Show All Designers</label>
+            <label for="role" class="text-lg font-medium text-gray-700 dark:text-gray-100">Show All Designers</label>
             <input type="checkbox" name="show_all" onchange="this.form.submit()" {{ $showAll ? 'checked' : '' }}>
         </form>
     </div>
@@ -17,7 +17,6 @@
             <th class="py-2 px-4">Name</th>
             <th class="py-2 px-4">Email</th>
             <th class="py-2 px-4">Active</th>
-            <th>Action</th>
 
         </tr>
         </thead>
@@ -29,16 +28,13 @@
                 <td class="py-2 px-4 border-b text-center">{{ $designer->name }}</td>
                 <td class="py-2 px-4 border-b text-center">{{ $designer->email }}</td>
                 <td class="py-2 px-4 border-b text-center">{{ $designer->active ? 'true' : 'false'  }}</td>
-                <td class="py-2 px-4 border-b text-center">
-                    <a href="{{ route('designers.edit', $designer->id) }}">Edit</a>
-                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
     <div class="grid-cols-2 text-center w-1/2 mt-5">
         <div class="grid-cols-2">
-            <a href="{{ route('designers.create') }}" class="text-blue-800 hover:text-blue-600">
+            <a href="{{ route('designers.create') }}" class="dark:text-gray-100 dark:hover:text-gray-400">
                 Create New Designer
             </a>
         </div>

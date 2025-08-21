@@ -12,19 +12,19 @@
         <div class="grid grid-cols-4 gap-4 pt-5 w-3/4">
             <!-- first row -->
             <div class="mb-2 col-span-1">
-                <label for="id" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="id" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     ID
                 </label>
-                <div id="id" class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
+                <div id="id" class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                     {{ $proof->id }}
                 </div>
             </div>
 
             <div class="md:col-span-1 mb-2">
-                <label for="job_id" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="job_id" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     Job ID
                 </label>
-                <div id="job_id" class="col-span-2 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
+                <div id="job_id" class="col-span-2 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
 
                     {{ $proof->job_id }}
                 </div>
@@ -33,35 +33,41 @@
             <div class="col-span-2"></div>
             <!-- second row -->
             <div class="mb-2 col-span-1">
-                <label for="id" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="id" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     Sent Date
                 </label>
-                <div id="id" class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
+                <div id="id" class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                     {{ $proof->proof_sent->format('d-m-Y') ?? 'Not Sent' }}
                 </div>
             </div>
             <div class="col-span-3"></div>
             <!-- third row -->
-            <div class="mb-2 col-span-2">
-                <label for="file_path" class="block text-sm font-medium text-gray-700 mb-1">
+            @if(!empty($proof->file_path))
+            <div class="mb-2 col-span-3">
+                <label for="file_path" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                     Previous File Path
                 </label>
-                <div id="file_path" class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
+                <div id="file_path" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                     {{ $proof->file_path }}
                 </div>
             </div>
-            <div class="col-span-1 flex items-center">
-                @if(Storage::disk('public')->exists($proof->file_path))
-                    <a href="{{ asset('storage/' . $proof->file_path) }}" class="text-blue-800 hover:text-blue-600" target="_blank">View File</a>
+                @if(!empty($proof->file_path) && Storage::disk('public')->exists($proof->file_path))
+                    <div class="col-span-1 flex items-center">
+                        <a href="{{ asset('storage/' . $proof->file_path) }}" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5" target="_blank">View File</a>
+                    </div>
                 @else
-                    <span>File N/A</span>
+                    <div class="col-span-1 block text-sm font-medium text-red-700 mb-1">
+                        <span>File Not Available</span>
+                    </div>
                 @endif
-            </div>
+
+            @endif
+
             <!-- fourth row -->
             <div class="col-span-3 ">
                 <label
                         for="file"
-                        class="mb-2 inline-block text-neutral-500 dark:text-neutral-400"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1"
                 >Select new file to upload - MP4s only - File size below 8Mb</label
                 >
                 <input
@@ -76,9 +82,10 @@
             <div class="col-span-1 text-center">
                 <a class="btn btn-primary text-red-800 hover:text-red-600" href="{{ route('proofs.show', $proof->id) }}">Cancel</a>
             </div>
+            <div class="col-span-2"></div>
             <div class="col-span-1 text-center">
                         <button type="submit"
-                                class="btn btn-primary text-blue-800 hover:text-blue-600"
+                                class="btn btn-primary text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5"
                         >Save</button>
             </div>
 

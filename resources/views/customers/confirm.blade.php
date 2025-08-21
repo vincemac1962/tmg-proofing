@@ -13,15 +13,15 @@
     @endif
     <div class="grid grid-cols-2 gap-4 pt-5 w-full bg-white dark:bg-gray-800 shadow rounded-lg">
             <div class="w-1/2 col-span-2 p-6">
-                <h2 class="text-xl font-semibold mb-4">Customer Details</h2>
-                <p><strong>Company Name:</strong> {{ $customer->company_name }}</p>
-                <p><strong>City:</strong> {{ $customer->customer_city }}</p>
-                <p><strong>Country:</strong> {{ $customer->customer_country }}</p>
-                <p><strong>Contract Reference:</strong> {{ $customer->contract_reference }}</p>
+                <h2 class="text-xl font-semibold text mb-4  text-gray-900 dark:text-gray-300 ">Customer Details:</h2>
+                <p class="text-gray-900 dark:text-gray-300"><strong>Company Name:</strong> {{ $customer->company_name }}</p>
+                <p class="text-gray-900 dark:text-gray-300"><strong>City:</strong> {{ $customer->customer_city }}</p>
+                <p class="text-gray-900 dark:text-gray-300"><strong>Country:</strong> {{ $customer->customer_country }}</p>
+                <p class="text-gray-900 dark:text-gray-300"><strong>Contract Reference:</strong> {{ $customer->contract_reference }}</p>
             </div>
 
             <div class="col-span-2 p-6 flex justify-center items-center">
-                <h2 class="text-xl mb-2">Do you want to create a new proofing job for {{ $customer->company_name }}?</h2>
+                <h2 class="text-xl mb-2 text-gray-900 dark:text-gray-300">Do you want to create a new proofing job for {{ $customer->company_name }}?</h2>
             </div>
             <div class="mb-3 col-span-1 flex justify-center items-center">
                 <a href="{{ route('customers.index') }}" class="text-red-800 hover:text-red-600 pl-5">No</a>
@@ -35,7 +35,7 @@
                     <input type="hidden" name="contract_reference" value="{{ $customer->contract_reference }}">
                     <button
                             type="submit"
-                            class="text-blue-800 hover:text-blue-600"
+                            class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400"
                     >
                         Yes
                     </button>

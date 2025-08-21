@@ -29,7 +29,7 @@
         <!-- Page Content -->
         <main class="flex-grow">
             <div class="py-6 bg-sky-50 dark:bg-gray-900 flex justify-center">
-                <div class="bg-white p-6 rounded-lg shadow-md w-5/6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-5/6">
                     @yield('content')
                 </div>
             </div>

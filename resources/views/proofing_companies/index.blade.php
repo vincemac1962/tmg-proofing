@@ -14,7 +14,7 @@
             </div>
         @endif
         <form method="GET" action="{{ route('proofing_companies.index') }}" class="flex flex-row items-center space-x-2">
-            <label for="show_all" class="text-lg font-medium text-gray-700">Show All Companies</label>
+            <label for="show_all" class="text-lg font-medium text-gray-700 dark:text-gray-100">Show All Companies</label>
             <input type="checkbox" id="show_all" name="show_all" value="1" onchange="this.form.submit()" {{ request('show_all') ? 'checked' : '' }}>
         </form>
   <!-- proofing companies table-->
@@ -28,7 +28,6 @@
                             <th class="py-2 px-4 text-center">Name</th>
                             <th class="py-2 px-4 text-center">Email</th>
                             <th class="py-2 px-4 text-center">Active</th>
-                            <th class="py-2 px-4 text-center"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,9 +39,6 @@
                                 <td class="py-2 px-4 text-center">{{ $company->name }}</td>
                                 <td class="py-2 px-4 text-center">{{ $company->email_address }}</td>
                                 <td class="py-2 px-4 text-center">{{ $company->active ? 'true' : 'false' }}</td>
-                                <td>
-                                    <a href="{{ route('proofing_companies.edit', $company) }}">Edit</a>
-                                </td>
                             </tr>
 
                         @endforeach
@@ -55,7 +51,7 @@
                 <a class="btn btn-primary text-red-800 hover:text-red-600" onclick="history.back()">Cancel</a>
             </div>
             <div class="col-span-3 text-center">
-                <a href="{{ route('proofing_companies.create') }}" class="text-blue-800 hover:text-blue-600">
+                <a href="{{ route('proofing_companies.create') }}" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
                     Create New Company
                 </a>
             </div>

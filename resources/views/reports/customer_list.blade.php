@@ -25,7 +25,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('perPage')">
                     <x-slot name="trigger">
-        <span class="py-1 bg-white dark:bg-gray-700 text-lg text-blue-800 hover:text-blue-400 leading-5">
+        <span class="hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 leading-5">
             {{ request('perPage', 10) }} {{ __('Records per Page') }}
         </span>
                     </x-slot>
@@ -51,7 +51,7 @@
         </div>
         <div class="flex flex-row items-center mt-4 space-x-2">
             <!-- Apply filters/search -->
-            <button type="submit" class="text-blue-800 hover:text-blue-600">
+            <button type="submit" class="hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 leading-5">
                 Apply Filters
             </button>
             <!-- Clear filters -->
@@ -60,10 +60,10 @@
             </a>
         </div>
     </form>
-
-    <table class="w-full border-collapse mt-16 mx-auto">
+    <div class="grid grid-cols-4 gap-4 pt-5 w-full">
+    <table class="col-span-4 w-full border-collapse mt-16 mx-auto">
         <thead>
-        <tr class="bg-emerald-800 dark:bg-gray-800 text-white dark:text-gray-300">
+        <tr class="bg-emerald-800 text-white dark:text-gray-300 dark:bg-emerald-800">
             <th class="py-2 px-4 text-left">ID</th>
             <th class="sortable py-2 px-4 text-left whitespace-nowrap" data-sort="contract_reference">
                 C/N
@@ -111,6 +111,10 @@
         @endforeach
         </tbody>
     </table>
+        <div class="col-span-4 text-center">
+            <a href="{{ route('reports.index') }}" class="text-red-800 hover:text-red-600 pl-5">Back</a>
+        </div>
+    </div>
 
 @endsection
 @push('scripts')

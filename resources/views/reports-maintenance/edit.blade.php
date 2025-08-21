@@ -4,9 +4,9 @@
 @section('content')
     <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white shadow rounded-lg">
+            <div class="bg-gray-100 dark:bg-gray-700 shadow rounded-lg">
                 <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Edit Report</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">Edit Report</h3>
                 </div>
                 <div class="px-4 py-5 sm:p-6">
                     <form action="{{ route('reports-maintenance.update', $report) }}" method="POST">

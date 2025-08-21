@@ -27,7 +27,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('customer_country')">
                     <x-slot name="trigger">
-            <span class="py-1 bg-white dark:bg-gray-700 text-blue-800 hover:text-blue-400 text-lg leading-5">
+            <span class="py-1 bg-white dark:bg-gray-800 text-blue-800  hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
                 {{ request('customer_country', __('Filter by Country')) }}
             </span>
                     </x-slot>
@@ -47,7 +47,7 @@
             <div>
                 <x-dropdown align="left" width="48" :active="request()->has('perPage')">
                     <x-slot name="trigger">
-            <span class="py-1 bg-white dark:bg-gray-700 text-lg text-blue-800 hover:text-blue-400 leading-5">
+            <span class="py-1 bg-white dark:bg-gray-800 text-blue-800  hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
                 {{ request('perPage', 25) }} {{ __('Records per Page') }}
             </span>
                     </x-slot>
@@ -73,7 +73,7 @@
         </div>
             <div class="flex flex-row items-center mt-4 space-x-2">
                 <!-- Apply filters/search -->
-                <button type="submit" class="text-blue-800 hover:text-blue-600">
+                <button type="submit" class="hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 leading-5">
                     Apply Filters
                 </button>
                 <!-- Clear filters -->
@@ -86,7 +86,7 @@
     <div class="w-full">
     <table class="w-full border-collapse mt-16 mx-auto">
         <thead>
-        <tr class="bg-teal-400 dark:bg-gray-800 text-white dark:text-gray-300">
+        <tr class="bg-teal-700  text-white dark:text-gray-300">
             <th class="py-2 px-4 text-left">ID</th>
             <th class="sortable py-2 px-4 text-left whitespace-nowrap" data-sort="contract_reference">
                 C/N
@@ -134,7 +134,7 @@
                         View Details
                     </a>
                 </td>
-                <td>
+                <td class="py-2 px-4 border-b">
                     <a href="{{ route('customers.edit', $customer->id) }}" class="text-blue-600 hover:text-blue-800">Edit</a>
                 </td>
             </tr>

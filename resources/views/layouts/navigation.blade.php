@@ -13,7 +13,8 @@
                     <! -- Customers Dropdown -->
                     <x-dropdown align="left" width="48" :active="request()->routeIs('customers.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Customers') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Customers') }}</span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('customers.index')">
@@ -27,7 +28,9 @@
                     <!-- Reminders Dropdown -->
                     <x-dropdown align="left" width="48" :active="request()->routeIs('reminders.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Reminders') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Reminders') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('reminders.index')">
@@ -41,7 +44,9 @@
                     <!-- Deeming Dropdown -->
                     <x-dropdown align="left" width="48" :active="request()->routeIs('deemable_jobs.index.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Deemable Jobs') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Deemable Jobs') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('deemable_jobs.index')">
@@ -55,7 +60,9 @@
                     <!-- Users Dropdown -->
                     <x-dropdown align="left" width="48" :active="request()->routeIs('users.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Users') }}</span>
+                           <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Users') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('users.index')">
@@ -69,7 +76,9 @@
                     <!-- Designers Dropdown -->
                     <x-dropdown align="left" width="48" :active="request()->routeIs('designers.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Designers') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Designers') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('designers.index')">
@@ -83,7 +92,9 @@
                     <!-- Proofing Companies Dropdown -->
                     <x-dropdown align="left" width="48" :active="request()->routeIs('customers.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Companies') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Companies') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('proofing_companies.index')">
@@ -96,7 +107,9 @@
                     </x-dropdown>
                     <x-dropdown align="left" width="48" :active="request()->routeIs('reports.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Reporting') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Reporting') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('reports.index')">
@@ -106,7 +119,9 @@
                     </x-dropdown>
                     <x-dropdown align="left" width="48" :active="request()->routeIs('reports-maintenance.*')">
                         <x-slot name="trigger">
-                            <span class="py-1 bg-white dark:bg-gray-700 text-sm leading-5">{{ __('Reports Maintenance') }}</span>
+                            <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-50 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">
+                                {{ __('Reports Maintenance') }}
+                            </span>
                         </x-slot>
                         <x-slot name="content">
                             <x-dropdown-link :href="route('reports-maintenance.index')">
@@ -137,13 +152,17 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <!-- Theme Toggle -->
+                        <button id="themeToggle" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Toggle Theme
+                        </button>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>

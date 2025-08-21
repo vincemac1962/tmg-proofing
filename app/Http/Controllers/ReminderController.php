@@ -60,15 +60,15 @@ class ReminderController extends Controller
             'formattedDate' => Carbon::parse($chosenDate)->format('d-m-Y'), // Formatted chosen date
             'sort_by' => $sortBy, // Current sorting column
             'sort_order' => $sortOrder, // Current sorting order
-            'csvDownloadLink' => url($csvFilePath), // Link to download the generated CSV file
+            // 'csvDownloadLink' => url($csvFilePath),  reinstate link to download the generated CSV file
         ]);
     }
 
     public function showReminderHistory(Request $request)
     {
         // Get default date range (last 30 days)
-        $endDate = $request->input('end_date', now()->format('Y-m-d'));
-        $startDate = $request->input('start_date', now()->subDays(30)->format('Y-m-d'));
+        $endDate =Carbon::parse($request->input('end_date', now()->format('Y-m-d')));
+        $startDate = Carbon::parse( $request->input('start_date', now()->subDays(30)->format('Y-m-d')));
 
         // Get filters from request
         $filterCountry = $request->input('country');

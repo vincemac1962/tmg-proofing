@@ -13,53 +13,53 @@
         <div class="grid grid-cols-4 gap-4 pt-5 w-full">
         <!-- first row -->
         <div class="mb-2 col-span-1">
-            <label for="contract_reference" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="contract_reference" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Contract Reference <span class="text-red-500">*</span>
             </label>
             <input
                     type="text"
                     id="contract_reference"
                     name="contract_reference"
-                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                     value="{{ $customer->contract_reference }}" required
             />
         </div>
 
         <div class="md:col-span-2 mb-2">
-            <label for="company_name" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="company_name" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Company Name <span class="text-red-500">*</span>
             </label>
             <input
                     type="text"
                     id="company_name"
                     name="company_name"
-                    class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                     value="{{ $customer->company_name }}"
                     required
             />
         </div>
         <!-- second row -->
         <div class="md:col-span-2 mb-2">
-            <label for="customer_city" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="customer_city" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 City  <span class="text-red-500">*</span>
             </label>
             <input
                     type="text"
                     id="customer_city"
                     name="customer_city"
-                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                     value="{{ $customer->customer_city }}" required
             />
         </div>
 
         <div class="md:col-span-2 mb-2">
-            <label for="customer_country" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="customer_country" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Country
             </label>
             <select
                     id="customer_country"
                     name="customer_country"
-                    class="w-full col-span-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full col-span-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"
             >
                 @foreach ($countries as $country)
                     <option value="{{ $country }}" {{ $customer->customer_country === $country ? 'selected' : '' }}>
@@ -70,58 +70,55 @@
         </div>
         <!-- third row -->
         <div class="md:col-span-2 mb-2">
-            <label for="customer_name" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="customer_name" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Contact  <span class="text-red-500">*</span>
             </label>
             <input
                     type="text"
                     id="customer_name"
                     name="customer_name"
-                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                     value="{{ $customer->customer_name }}" required
             />
         </div>
 
         <div class="md:col-span-2 mb-4">
-            <label for="customer_email" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="customer_email" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Email <span class="text-red-500">*</span>
             </label>
             <input
                     type="email"
                     id="customer_email"
                     name="customer_email"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                     value="{{ $customer->user->email }}" required
             />
         </div>
 
         <!-- fourth row -->
         <div class="w-1/2 md:col-span-4 mb-2">
-            <label for="customer_name" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="customer_name" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Phone Number
             </label>
             <input
                     type="text"
                     id="contact_number"
                     name="contact_number"
-                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    class="col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                     value="{{ $customer->contact_number }} "
             />
         </div>
 
         <!-- fifth row -->
         <div class="w-full md:col-span-4 mb-2">
-            <label for="customer_notes" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="customer_notes" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Notes
             </label>
             <textarea
                     rows="4"
                     name="notes"
                     id="customer_notes"
-                    class="text-indent-0 col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-                {{ $customer->notes }}
-            </textarea>
+                    class="text-indent-0 col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"> {{ $customer->notes }}</textarea>
         </div>
         <!-- sixth row -->
             <div class="md:col-span-2 flex justify-center items-center">
@@ -130,7 +127,7 @@
             <div class="md:col-span-2 flex justify-center items-center">
                 <button
                         type="submit"
-                        class="text-blue-800 hover:text-blue-600"
+                        class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5"
                 >
                     Save
                 </button>
