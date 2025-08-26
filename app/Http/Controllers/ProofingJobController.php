@@ -31,6 +31,7 @@ class ProofingJobController extends Controller
             'customer_city' => $request->input('customer_city', $customer->customer_city),
             'customer_country' => $request->input('customer_country', $customer->customer_country),
             'contract_reference' => $request->input('contract_reference', $customer->contract_reference),
+            //  ToDo: Don't allow default Proofing Company to be passed
             'designers' => $designers,
             'proofingCompanies' => $proofingCompanies,
         ]);

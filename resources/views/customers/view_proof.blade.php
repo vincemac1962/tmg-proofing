@@ -10,7 +10,7 @@
 <body class="bg-gray-50">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-center items-center mb-8">
-        <img src="{{ $proofingCompany->company_logo_url }}" alt="Company Logo" class="h-16 w-auto">
+        <img style="max-height: 12.5rem" src="{{ Storage::url('public/images/' . $proofingCompany->company_logo_url) }}" alt="Company Logo">
     </div>
 
     <div class="bg-white rounded-lg shadow-sm p-6">

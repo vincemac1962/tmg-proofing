@@ -130,12 +130,12 @@
                 <td class="py-2 px-4 border-b">{{ $customer->customer_city }}</td>
                 <td class="py-2 px-4 border-b">{{ $customer->customer_country }}</td>
                 <td class="py-2 px-4 border-b">
-                    <a href="{{ route('customers.show', $customer->id) }}" class="text-blue-600 hover:text-blue-800">
+                    <a href="{{ route('customers.show', $customer->id) }}" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
                         View Details
                     </a>
                 </td>
                 <td class="py-2 px-4 border-b">
-                    <a href="{{ route('customers.edit', $customer->id) }}" class="text-blue-600 hover:text-blue-800">Edit</a>
+                    <a href="{{ route('customers.edit', $customer->id) }}" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">Edit</a>
                 </td>
             </tr>
         @endforeach

@@ -54,7 +54,7 @@
 <div class="content" style="width: 80%; max-width: 80%; min-height: 50%; background-color: #F5F5F5; margin: 0 auto; padding: 20px; text-align: center; border-radius: 16px;">
         <div class="header-image">
             <!-- ToDo : create bas64 image for the logo -->
-            <img src="{{ $proofingCompany->company_logo_url }}" alt="Company Logo" style="max-width: 150px;">
+            <img src="{{ $logo_src }}" alt="Logo">
         </div>
         <div class="body-container">
             <h1 style="font-family: 'Open Sans', sans-serif">{{ $subject }}</h1>
@@ -96,7 +96,7 @@
             <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: center; gap: 20px; padding: 20px 0; margin: 0 auto;">
                 <!-- Left Column -->
                 <div style="flex: 0 0 auto; padding-right: 20px;">
-                    <img src="{{ $proofingCompany->company_logo_url }}" alt="Company Logo" style="max-width: 75px;">
+                    <img src="{{ $logo_src }}" alt="Company Logo" style="max-width: 75px;">
                 </div>
 
                 <!-- Right Column -->

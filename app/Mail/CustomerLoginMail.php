@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use AllowDynamicProperties;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Log;
 
 #[AllowDynamicProperties] class CustomerLoginMail extends Mailable
 {
@@ -18,6 +19,8 @@ use Illuminate\Mail\Mailable;
     public $password;
     public $login_url;
     public $subject;
+    public $notes;
+    public $logo;
 
     public function __construct($data)
     {
@@ -32,6 +35,7 @@ use Illuminate\Mail\Mailable;
         $this->login_url = config('app.base_login_url') . '?proofing_company=' . ($this->proofingCompany ? $this->proofingCompany->id : '');
         $this->subject = 'Your Proofing Login Details';
         $this->notes = $data['notes'] ?? null;
+        $this->logo = $data['logo'] ?? null;
         // Ensure all required fields are set
         if (empty($this->recipient_name) || empty($this->proofingCompany) || empty($this->loginId) || empty($this->recipient_password)) {
             throw new \InvalidArgumentException('Missing required data for CustomerLoginMail');
@@ -44,9 +48,18 @@ use Illuminate\Mail\Mailable;
 
     public function build()
     {
+        Log::info('Logo being passed is ' . $this->logo);
         return $this->view('emails.customer_login')
             ->text('emails.customer_login_plain')
             ->replyTo($this->proofingCompany->email_address)
-            ->subject('Your Login Details');
+            ->subject('Your Login Details')
+            ->attach(public_path('storage/images/' . $this->logo), [
+                'as' => $this->logo,
+                'mime' => 'image/svg+xml',
+            ])
+            ->with([
+                'logo_src' => 'cid:' . $this->logo,
+                'mime' => 'image/png',
+            ]);
     }
 }

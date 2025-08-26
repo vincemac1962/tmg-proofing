@@ -57,6 +57,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'base_login_url' => 'http://127.0.0.1:8000/login',
+
     'asset_url' => env('ASSET_URL'),
 
     /*

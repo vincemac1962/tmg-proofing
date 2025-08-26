@@ -158,6 +158,13 @@ class ProofController extends Controller
             // Retrieve the proofing company associated with the proofing job
             $proofingCompany = $proof->proofingJob->proofingCompany;
 
+            // set up inline embedding of logo
+            $logo = $proofingCompany->company_logo_url;
+
+            /*$imageData = base64_encode(file_get_contents($imagePath));
+            $src = 'data: ' . mime_content_type($imagePath) . ';base64,' . $imageData; */
+
+
             $data = [
                 'subject' => 'Your Advertisement Proof',
                 'recipient_name' => $proof->proofingJob->customer->user->name,
@@ -168,6 +175,7 @@ class ProofController extends Controller
                 'company_name' => $proof->proofingJob->customer->company_name,
                 'notes' => $proof->notes,
                 'proofingCompany' => $proofingCompany,
+                'logo' => $logo,
             ];
 
             Mail::to($data['recipient_email'])->send(new CustomerLoginMail($data));
@@ -218,7 +226,7 @@ class ProofController extends Controller
             ->with('success', 'Proof deleted successfully.');
     }
 
-    // ToDo: implement method to all proofing videos except most recent one
+    // ToDo: implement method to delete all proofing videos except most recent one
     public function deleteAllExceptMostRecent($jobId)
     {
         $proofs = Proof::where('job_id', $jobId)->orderBy('created_at', 'desc')->get();
