@@ -120,20 +120,33 @@
                     id="customer_notes"
                     class="text-indent-0 col-span-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-900 text-gray-900 dark:text-gray-100"> {{ $customer->notes }}</textarea>
         </div>
-        <!-- sixth row -->
-            <div class="md:col-span-2 flex justify-center items-center">
-                <a href="{{ route('customers.index') }}" class="text-red-800 hover:text-red-600 pl-5">Cancel</a>
-            </div>
-            <div class="md:col-span-2 flex justify-center items-center">
-                <button
-                        type="submit"
-                        class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5"
-                >
-                    Save
-                </button>
-            </div>
+
         </div>
     </form>
+
+        <!-- sixth row -->
+
+            <div class="grid grid-cols-3 gap-4 pt-5 w-full md:col-span-4">
+                <div class="md:col-span-1 flex justify-center items-center">
+                    <a href="{{ route('customers.index') }}" class="text-red-800 hover:text-red-600 pl-5">Cancel</a>
+                </div>
+                <div class="md:col-span-1 flex justify-center items-center">
+                    <button
+                            type="submit"
+                            class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5"
+                    >
+                        Save
+                    </button>
+                </div>
+                <div class="md:col-span-1 flex justify-center items-center">
+                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this customer?');" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-800 hover:text-red-600 pl-5">Delete</button>
+                    </form>
+                </div>
+            </div>
+
             @if ($errors->any())
                 <div class="md:col-span-4">
                     <h2 class="text-red-600 font-bold">Please fix the following errors:</h2>
