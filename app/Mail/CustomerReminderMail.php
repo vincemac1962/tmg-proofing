@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class CustomerReminderMail extends Mailable
+class CustomerReminderMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

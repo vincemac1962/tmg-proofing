@@ -3,10 +3,11 @@
 namespace App\Mail;
 
 use AllowDynamicProperties;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Log;
 
-#[AllowDynamicProperties] class CustomerLoginMail extends Mailable
+#[AllowDynamicProperties] class CustomerLoginMail extends Mailable implements ShouldQueue
 {
     public $contract_reference;
     public $recipient_name;
@@ -48,7 +49,7 @@ use Illuminate\Support\Facades\Log;
 
     public function build()
     {
-        Log::info('Logo being passed is ' . $this->logo);
+        //Log::info('Logo being passed is ' . $this->logo);
         return $this->view('emails.customer_login')
             ->text('emails.customer_login_plain')
             ->replyTo($this->proofingCompany->email_address)

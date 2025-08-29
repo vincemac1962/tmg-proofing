@@ -214,7 +214,8 @@ class ReminderController extends Controller
                     'proofingCompany' => $proofingCompany,
                 ];
                 try {
-                    Mail::to($data['recipient_email'])->send(new CustomerReminderMail($data));
+                    //Mail::to($data['recipient_email'])->send(new CustomerReminderMail($data));
+                    Mail::to($data['recipient_email'])->queue(new CustomerReminderMail($data));
                     $proof->update(['proof_sent' => now()]);
                     echo "Reminder email sent to: " . $data['recipient_email'] . "\n";
                     // Log successful email sending

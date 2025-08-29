@@ -178,7 +178,8 @@ class ProofController extends Controller
                 'logo' => $logo,
             ];
 
-            Mail::to($data['recipient_email'])->send(new CustomerLoginMail($data));
+            //Mail::to($data['recipient_email'])->send(new CustomerLoginMail($data));
+            Mail::to($data['recipient_email'])->queue(new CustomerLoginMail($data));
 
             Activity::create([
                 'job_id' => $proof->proofingJob->id,
