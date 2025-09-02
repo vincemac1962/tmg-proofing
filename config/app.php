@@ -12,8 +12,9 @@ return [
     |
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
+    | any other location as required by the application or its package
     |
+    | this file is EXCLUDED from the git repository from 02/09/2025
     */
 
     'name' => env('APP_NAME', 'Time Proofing'),
