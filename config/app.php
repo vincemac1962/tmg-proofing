@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Time Proofing'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    /*'url' => env('APP_URL', 'http://localhost'),*/
+
+    'url' => env('APP_URL', 'https://phplaravel-851666-5778396.cloudwaysapps.com/'),
 
     /*'base_login_url' => 'http://127.0.0.1:8000/login',*/
     'base_login_url' => 'https://phplaravel-851666-5778396.cloudwaysapps.com/login',
