@@ -57,7 +57,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'base_login_url' => 'http://127.0.0.1:8000/login',
+    /*'base_login_url' => 'http://127.0.0.1:8000/login',*/
+    'base_login_url' => 'https://phplaravel-851666-5778396.cloudwaysapps.com/login',
 
     'asset_url' => env('ASSET_URL'),
 
