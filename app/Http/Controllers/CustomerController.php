@@ -205,11 +205,16 @@ class CustomerController extends Controller
             }
         }
 
-        return view('customers.landing', compact('user', 'customers', 'proofingCompany'));
+        $proofingCompanyArray = $proofingCompany->toArray();
+
+        return view('customers.landing', compact('user', 'customers', 'proofingCompany', 'proofingCompanyArray'));
     }
 
     public function viewProof($id)
     {
+        // get the current user
+        $user = auth()->user();
+
         // Retrieve the most recent proof for the given proofing_jobs.id
         $latestProof = Proof::where('job_id', $id)->latest()->first();
 
@@ -248,7 +253,9 @@ class CustomerController extends Controller
 
         $proofingCompany = $proofingJob->proofingCompany;
 
-        return view('customers.view_proof', compact('proofingJob',  'proofingCompany','latestProof', 'videoDimensions'));
+        $proofingCompanyArray = $proofingCompany->toArray();
+
+        return view('customers.view_proof', compact('proofingJob',  'proofingCompany', 'proofingCompanyArray', 'latestProof', 'videoDimensions', 'user'));
     }
 
     public function submitAmendment(Request $request)

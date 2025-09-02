@@ -79,8 +79,8 @@
                 <p><strong>Password:</strong> {{ $recipient_password }}</p>
 
                 @if(!empty($notes))
-                    <p>The designer who created you advertisement has added the following notes to the proof:</p>
-                    <p><strong>Designer Notes:</strong> {{ $notes }}</p>
+                    <p>The following notes were added to the proof:</p>
+                    <p><strong>Additional Notes:</strong> {{ $notes }}</p>
                 @endif
 
                 <p>If you have any questions or concerns regarding the design process of your advertisement, we are always
