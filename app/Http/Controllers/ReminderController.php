@@ -12,9 +12,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use \App\Services\DropdownService;
+use \App\Services\CsvGeneratorService;
 
 class ReminderController extends Controller
 {
+    protected $csvGenerator;
+
+    public function __construct(CsvGeneratorService $csvGenerator)
+    {
+        $this->csvGenerator = $csvGenerator;
+    }
     public function index(Request $request)
     {
         // Set the default date to 14 days ago and retrieve the chosen date from the request
@@ -35,6 +42,9 @@ class ReminderController extends Controller
         // Build the query to fetch reminders based on filters and sorting
         $query = $this->buildReminderQuery($chosenDate, $filterCountry, $filterProofingCompany, $sortBy, $sortOrder);
 
+
+
+
         // Paginate the query results manually
         $perPage = $request->get('perPage', 25);
         $currentPage = $request->input('page', 1); // Current page number
@@ -47,9 +57,21 @@ class ReminderController extends Controller
             ['path' => $request->url(), 'query' => $request->query()] // Pagination links
         );
 
-        //ToDo:
-        // Generate a CSV file from the query results
-       //$csvFilePath = $this->generateCsv($query);
+        // create session data from the query results for use in other methods
+        $csvData = array_map(function ($item) {
+            return [
+                'Job ID' => $item->job_id,
+                'Company' => $item->company_name,
+                'Country' => $item->customer_country,
+                'Proofing Company' => $item->proofing_company_name,
+                'Activity Type' => $item->activity_type,
+                'Last Activity Date' => $item->activity_updated_at,
+            ];
+        }, $reminders->items());
+
+        $request->session()->put('reminder_query', $csvData);
+        $request->session()->put('reminder_title', 'reminders_due');
+
 
         // Return the view with reminders, filters, sorting, and the CSV download link
         return view('reminders.index', [
@@ -60,15 +82,25 @@ class ReminderController extends Controller
             'formattedDate' => Carbon::parse($chosenDate)->format('d-m-Y'), // Formatted chosen date
             'sort_by' => $sortBy, // Current sorting column
             'sort_order' => $sortOrder, // Current sorting order
-            // 'csvDownloadLink' => url($csvFilePath),  reinstate link to download the generated CSV file
         ]);
+    }
+
+        public function downloadCsv(Request $request)
+    {
+        $data = $request->session()->get('reminder_query', []);
+        if (empty($data)) {
+            return redirect()->back()->with('error', 'No data available to generate CSV.');
+        }
+        $title = session('reminder_title');
+        $csvPath = $this->csvGenerator->generateAndStoreCsv($data, $title);
+        return response()->download(public_path($csvPath))->deleteFileAfterSend(true);
     }
 
     public function showReminderHistory(Request $request)
     {
         // Get default date range (last 30 days)
-        $endDate =Carbon::parse($request->input('end_date', now()->format('Y-m-d')));
-        $startDate = Carbon::parse( $request->input('start_date', now()->subDays(30)->format('Y-m-d')));
+        $endDate = Carbon::parse($request->input('end_date', now()->format('Y-m-d')));
+        $startDate = Carbon::parse($request->input('start_date', now()->subDays(30)->format('Y-m-d')));
 
         // Get filters from request
         $filterCountry = $request->input('country');
@@ -86,7 +118,8 @@ class ReminderController extends Controller
             ->where('updated_at', '<=', $endDate . ' 23:59:59') // Include the entire end date
             ->with([
                 'proofingJob.customer', // Eager load proofing job and customer
-                'user' // Eager load user
+                'user', // Eager load user
+                'proofingJob.proofingCompany' // Eager load proofing company
             ]);
 
         // Apply filters if present
@@ -109,6 +142,34 @@ class ReminderController extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate($perPage);
 
+        // Convert Eloquent models to arrays
+        $reminderItems = array_map(function ($item) {
+            return $item->toArray();
+        }, $reminders->items());
+
+        // Convert Eloquent models to arrays
+        $reminderItems = array_map(function ($item) {
+            return $item->toArray();
+        }, $reminders->items());
+
+        // Create a CSV-friendly array from converted models
+        $csvData = array_map(function ($item) {
+            return [
+                'Job ID' => $item['job_id'],
+                'Updated' => Carbon::parse($item['updated_at'])->format('d-M-Y H:i'),
+                'Company' => $item['proofing_job']['customer']['company_name'],
+                'Country' => $item['proofing_job']['customer']['customer_country'],
+                'Proofing Company' => $item['proofing_job']['proofing_company']['name'],
+                'Activity Type' => $item['activity_type'],
+                'Sent By' => $item['user']['name'] ?? 'N/A',
+            ];
+        }, $reminderItems);
+
+        $request->session()->put('reminder_query', $csvData);
+        $request->session()->put('reminder_title', 'reminder_history');
+
+
+
         // Get dropdown values
         list($countries, $proofingCompanies) = $this->getDropdownValues();
 
@@ -122,32 +183,7 @@ class ReminderController extends Controller
         ]);
     }
 
-    private function generateCsv(array $data): string
-    {
-        // create a string from now() date to be used in the CSV file name
-        $now = Carbon::now()->format('Y-m-d_H-i-s');
-        $filePath = 'storage/reminders/reminders_' . $now . '.csv';
-        $file = fopen(public_path($filePath), 'w');
 
-        // Add headers
-        fputcsv($file, ['Job ID', 'Customer Name', 'Country', 'Time Company', 'Activity Type', 'Updated At']);
-
-        // Add data rows
-        foreach ($data as $row) {
-            fputcsv($file, [
-                $row->job_id,
-                $row->company_name,
-                $row->customer_country,
-                $row->proofing_company_name,
-                $row->activity_type,
-                $row->activity_updated_at,
-            ]);
-        }
-
-        fclose($file);
-
-        return $filePath;
-    }
 
     // process selected records to send reminders
     public function processReminders(Request $request)
@@ -308,4 +344,7 @@ class ReminderController extends Controller
         $dropdownService = app(DropdownService::class);
         return $dropdownService->getDropdownValues();
     }
+
 }
+
+

@@ -24,6 +24,7 @@ class ReportsController extends Controller
     {
         $this->csvGenerator = $csvGenerator;
     }
+
     public function index()
     {
         $reports = Report::all()->groupBy('report_category')->map(function ($group) {
@@ -149,18 +150,17 @@ class ReportsController extends Controller
             ->join('proofing_jobs', 'proofs.job_id', '=', 'proofing_jobs.id')
             ->join('customers', 'proofing_jobs.customer_id', '=', 'customers.id')
             ->join('proofing_companies', 'proofing_jobs.proofing_company_id', '=', 'proofing_companies.id')
-            ->join('designers', 'proofing_jobs.designer_id', '=', 'designers.id'); ;
+            ->join('designers', 'proofing_jobs.designer_id', '=', 'designers.id');;
 
-            // Apply sorting if provided
+        // Apply sorting if provided
         $sortBy = $request->filled('sort_by') ? $request->input('sort_by') : 'id';
         $sortOrder = $request->filled('sort_order') ? $request->input('sort_order') : 'asc';
-
 
 
         // Get all results for CSV
         $allResults = (clone $query)->get();
 
-        // Store in session
+        // Store in session - used for CSV download
         session(['report_data.proofs_report' => $allResults->toArray()]);
 
         // Get paginated results for view
@@ -170,8 +170,6 @@ class ReportsController extends Controller
         // Get the report configuration
         $report = Report::where('report_view', 'proofs_report')->first();
 
-        // Generate CSV file
-        $csvFilePath = $this->csvGenerator->generate($allResults->toArray(), $report);
 
         return view('reports.proofs_report', compact(
             'title',
@@ -189,7 +187,6 @@ class ReportsController extends Controller
             'designers',
             'startDate',
             'endDate',
-            'csvFilePath',
         ));
     }
 
@@ -253,10 +250,10 @@ class ReportsController extends Controller
         // Get all results for CSV
         $allResults = (clone $query)->get();
 
-    // Apply sorting
-        $query->orderBy($sortBy, $sortOrder );
+        // Apply sorting
+        $query->orderBy($sortBy, $sortOrder);
 
-        // Store in session with report key
+        // Store in session with report key - used for CSV download
         session(['report_data.amendments_report' => $allResults->toArray()]);
 
 
@@ -266,11 +263,6 @@ class ReportsController extends Controller
 
         // Get the report configuration
         $report = Report::where('report_view', 'amendments_report')->first();
-
-        // Generate CSV file
-        $csvFilePath = $this->csvGenerator->generate($allResults->toArray(), $report);
-
-
 
         return view('reports.amendments_report', compact(
             'title',
@@ -287,7 +279,6 @@ class ReportsController extends Controller
             'designers',
             'startDate',
             'endDate',
-            'csvFilePath',
             'report',
         ));
     }
@@ -376,12 +367,6 @@ class ReportsController extends Controller
         // Get the report configuration
         $report = Report::where('report_view', 'approvals_report')->first();
 
-        // Generate CSV file
-        $csvFilePath = $this->csvGenerator->generate($allResults->toArray(), $report);
-
-
-
-
         return view('reports.approvals_report', compact(
             'title',
             'approvals',
@@ -398,7 +383,6 @@ class ReportsController extends Controller
             'designers',
             'startDate',
             'endDate',
-            'csvFilePath',
         ));
     }
 
@@ -420,11 +404,9 @@ class ReportsController extends Controller
         if (!$report) {
             return back()->with('error', 'Report configuration not found.');
         }
-
-        $csvFilePath = $this->csvGenerator->generate($data, $report);
-        return response()->download(public_path($csvFilePath));
+        $title = $report->report_view;
+        $csvFilePath = $this->csvGenerator->generate($data, $title, $report);
+        return response()->download(public_path($csvFilePath))->deleteFileAfterSend(true);
     }
-
-
 
 }

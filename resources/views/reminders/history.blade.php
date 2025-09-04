@@ -128,8 +128,8 @@
 
         @foreach($reminders->groupBy('week_start') as $weekStart => $weekReminders)
             <!-- Week Header -->
-            <h3 class="mt-8 mb-4 text-lg font-semibold">
-                w/b {{ \Carbon\Carbon::parse($weekStart)->format('d-M-Y') }}
+            <h3 class="mt-8 mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 inline-block border-t-2 border-b-2 border-rose-400 px-2">
+                W/B {{ \Carbon\Carbon::parse($weekStart)->format('d-M-Y') }}
             </h3>
 
             <!-- Reminders Table -->
@@ -174,6 +174,14 @@
                 </tbody>
             </table>
         @endforeach
+        <div class="grid grid-cols-2 w-full pt-5">
+            <div class="col-span-1 text-center">
+                <button type="submit" class="btn btn-primary text-red-800 hover:text-red-600" onclick="window.history.back()">Back</button>
+            </div>
+            <div class="col-span-1 text-center">
+                <a href="{{ route('reminders.download_history') }}" class="btn btn-primary text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">Generate and Download CSV</a>
+            </div>
+        </div>
 
         <!-- Pagination -->
         <div class="flex flex-col items-center mt-4">

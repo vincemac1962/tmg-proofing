@@ -170,13 +170,7 @@
                 <button type="submit" class="btn btn-primary text-red-800 hover:text-red-600">Send Reminders</button>
             </div>
             <div class="col-span-1 text-center">
-                @if(!empty($csvDownloadLink))
-                <a href="{{ $csvDownloadLink }}" class="btn btn-primary text-blue-800 hover:text-blue-600">Download CSV</a>
-                @else
-                    <span class="text-gray-400 pl-5">
-                        Download CSV
-                </span>
-                @endif
+                <a href="{{ route('reminders.download_reminders') }}" class="btn btn-primary text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">Generate and Download CSV</a>
             </div>
         </div>
     </form>

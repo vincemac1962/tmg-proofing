@@ -113,6 +113,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reminders', [ReminderController::class, 'index'])->name('reminders.index');
     Route::post('/reminders/process', [ReminderController::class, 'processReminders'])->name('reminders.process');
     Route::get('/reminders/history', [ReminderController::class, 'showReminderHistory'])->name('reminders.history');
+    Route::get('/reminders/download_reminders', [ReminderController::class, 'downloadCsv'])->name('reminders.download_reminders');
+    Route::get('/reminders/download_history', [ReminderController::class, 'downloadCsv'])->name('reminders.download_history');
 
     // Deemable jobs routes
     Route::get('/deemable_jobs', [DeemableJobsController::class, 'index'])->name('deemable_jobs.index');
