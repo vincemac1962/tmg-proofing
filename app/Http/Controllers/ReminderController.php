@@ -142,10 +142,6 @@ class ReminderController extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate($perPage);
 
-        // Convert Eloquent models to arrays
-        $reminderItems = array_map(function ($item) {
-            return $item->toArray();
-        }, $reminders->items());
 
         // Convert Eloquent models to arrays
         $reminderItems = array_map(function ($item) {
