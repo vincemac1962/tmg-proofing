@@ -15,7 +15,8 @@ class CreateCustomersTable extends Migration
             $table->string('customer_city', 50)->nullable();
             $table->string('customer_country', 20)->nullable();
             $table->string('contact_number', 20)->nullable();
-            $table->string('plain_password')->nullable();
+            $table->string('plain_password',20)->nullable();
+            $table->string('additional_pocs', 100)->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

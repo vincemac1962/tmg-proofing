@@ -86,6 +86,20 @@ class CustomerController extends Controller
             'notes' => 'nullable|string',
             'customer_email' => 'required|string|email|max:255|unique:users,email',
             'customer_password' => 'required|string|min:8',
+            'additional_pocs' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if ($value !== null && trim($value) !== '') {
+                        $emails = array_map('trim', explode(',', $value));
+                        foreach ($emails as $email) {
+                            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                $fail('The Additional POCs field must contain valid email addresses separated by commas.');
+                                break;
+                            }
+                        }
+                    }
+                }
+            ],
         ]);
 
         $user = User::create([
@@ -107,6 +121,7 @@ class CustomerController extends Controller
             'contact_number' => $request->contact_number,
             'plain_password' => $request->customer_password, // Store plain password
             'notes' => $request->notes,
+            'additional_pocs' => $request->additional_pocs,
         ]);
 
 
@@ -144,6 +159,20 @@ class CustomerController extends Controller
             'contact_number' => 'nullable|string|max:20',
             'notes' => 'nullable|string',
             'customer_password' => 'nullable|string|min:8',
+            'additional_pocs' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if ($value !== null && trim($value) !== '') {
+                        $emails = array_map('trim', explode(',', $value));
+                        foreach ($emails as $email) {
+                            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                $fail('The additional_pocs field must contain valid email addresses separated by commas.');
+                                break;
+                            }
+                        }
+                    }
+                }
+            ],
         ]);
 
         $customer = Customer::findOrFail($id);

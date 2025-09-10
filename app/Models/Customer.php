@@ -10,7 +10,7 @@ class Customer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'company_name', 'contract_reference', 'customer_city', 'customer_country', 'contact_number', 'plain_password', 'notes'
+        'user_id', 'company_name', 'contract_reference', 'customer_city', 'customer_country', 'contact_number', 'plain_password', 'additional_pocs','notes'
     ];
 
     // add boot method for cascading deletion

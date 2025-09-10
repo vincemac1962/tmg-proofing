@@ -53,8 +53,7 @@
 <body>
 <div class="content" style="width: 80%; max-width: 80%; min-height: 50%; background-color: #F5F5F5; margin: 0 auto; padding: 20px; text-align: center; border-radius: 16px;">
         <div class="header-image">
-            <!-- ToDo : create bas64 image for the logo -->
-            <img src="{{ $logo_src }}" alt="Logo">
+            <img src="{{ $logo_src }}" alt="Logo" style="max-width: 90%; height: auto; margin: 0 auto 20px; display: block;">
         </div>
         <div class="body-container">
             <h1 style="font-family: 'Open Sans', sans-serif">{{ $subject }}</h1>

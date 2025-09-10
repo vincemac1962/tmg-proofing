@@ -49,6 +49,16 @@
         </div>
         <div class="col-span-4"></div>
         <!-- third row -->
+        <div class="md:col-span-4 mb-4">
+            <label for="additional_pocs" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
+                Additional POCs
+            </label>
+            <div id="additional_pocs" class="col-span-4 w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                {{ $customer->additional_pocs }}
+            </div>
+        </div>
+        <div class="col-span-4"></div>
+        <!-- fourth row -->
         @if(!empty($customer->notes))
         <div class="w-full md:col-span-8 mb-2">
             <label for="customer_notes" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
@@ -59,7 +69,7 @@
             </div>
         </div>
         @endif
-        <!-- fourth row - proofing jobs table -->
+        <!-- fifth row - proofing jobs table -->
         <div class="w-full col-span-8 mb-2">
             @if($customer->proofingJobs->isEmpty())
                 <p>No proofing jobs found.</p>

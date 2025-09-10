@@ -178,8 +178,21 @@ class ProofController extends Controller
                 'logo' => $logo,
             ];
 
-            //Mail::to($data['recipient_email'])->send(new CustomerLoginMail($data));
-            Mail::to($data['recipient_email'])->queue(new CustomerLoginMail($data));
+            $mail = new CustomerLoginMail($data);
+
+            // Prepare CC and BCC
+            $cc = [];
+            $additionalPocs = $proof->proofingJob->customer->additional_pocs;
+            if (!empty($additionalPocs)) {
+                $cc = array_map('trim', explode(',', $additionalPocs));
+            }
+            $bcc = ['bcc@example.com']; // Hardcoded BCC address
+
+            $email = Mail::to($data['recipient_email']);
+            if (!empty($cc)) {
+                $email->cc($cc);
+            }
+            $email->bcc($bcc)->queue($mail);
 
             Activity::create([
                 'job_id' => $proof->proofingJob->id,
