@@ -46,8 +46,10 @@ Route::middleware(['auth'])->group(function () {
     // users resource routes
     Route::resource('users', UserController::class);
 
+
+
     // customers resource routes
-    Route::resource('customers', CustomerController::class);
+    Route::resource('customers', CustomerController::class)->middleware('access.level:1');
     Route::get('customers/{customer}/confirm', [CustomerController::class, 'confirm'])->name('customers.confirm');
 
     // Proofing Jobs routes
@@ -60,11 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('customers/{customerId}/proofing_jobs/{proofingJob}', [ProofingJobController::class, 'update'])->name('proofing_jobs.update');
     Route::delete('customers/{customerId}/proofing_jobs/{proofingJob}', [ProofingJobController::class, 'destroy'])->name('proofing_jobs.destroy');
 
-    // customers proofing routes
-    Route::get('/customers/view-proof/{id}', [CustomerController::class, 'viewProof'])->name('customers.view_proof');
-    Route::post('/customers/submit-amendment', [CustomerController::class, 'submitAmendment'])->name('customers.submit_amendment');
-    Route::post('/customers/submit-approval', [CustomerController::class, 'submitApproval'])->name('customers.submit_approval');
-    Route::get('/proofs/{id}/download', [CustomerController::class, 'downloadProof'])->name('proofs.download');
+
 
     // proofs resource routes
     Route::resource('proofs', ProofController::class)->except(['create', 'store']);
@@ -135,10 +133,12 @@ Route::middleware(['auth'])->group(function () {
         'reports-maintenance' => 'report'
     ]);
 
-    // test route - pulls test.blade.php from resources/views
-    Route::get('/test', function () {
-        return view('_test.test');
-    })->name('test');
+
+    // customers proofing routes
+    Route::get('/customers/view-proof/{id}', [CustomerController::class, 'viewProof'])->name('customers.view_proof');
+    Route::post('/customers/submit-amendment', [CustomerController::class, 'submitAmendment'])->name('customers.submit_amendment');
+    Route::post('/customers/submit-approval', [CustomerController::class, 'submitApproval'])->name('customers.submit_approval');
+    Route::get('/proofs/{id}/download', [CustomerController::class, 'downloadProof'])->name('proofs.download');
 
 
 
