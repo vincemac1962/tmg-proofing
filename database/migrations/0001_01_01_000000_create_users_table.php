@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', ['customer', 'admin', 'super_admin', 'designer'])->default('customer');
+            $table->tinyInteger('access_level')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_active')->default(true);
@@ -23,6 +24,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE users ADD CONSTRAINT check_access_level CHECK (access_level IN (0, 1, 2, 3))');
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

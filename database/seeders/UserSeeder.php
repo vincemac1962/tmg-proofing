@@ -22,12 +22,14 @@ class UserSeeder extends Seeder
             'name' => 'Chris Bond',
             'email' =>'chris.bond@timemg.com',
             'password' => Hash::make('T1m3M3d1a'),
+            'access_level' => 1,
         ]);
 
         User::factory()->designer()->create([
             'name' => 'Ray Gritt',
             'email' =>'raygritt@hotmail.co.uk',
             'password' => Hash::make('T1m3M3d1a'),
+            'access_level' => 1,
         ]);
 
         // Create admin users
@@ -35,6 +37,7 @@ class UserSeeder extends Seeder
             'name' => 'Hannah Dunn',
             'email' => 'design@timemg.com',
             'password' => Hash::make('T1m3M3d1a'),
+            'access_level' => 2,
             ] );
 
         // Create one super_admin
@@ -42,6 +45,7 @@ class UserSeeder extends Seeder
             'name' => 'Vince MacRae',
             'email' => 'vince@test.com',
             'password' => Hash::make('T1m3M3d1a'),
+            'access_level' => 3,
         ]);
     }
 }
