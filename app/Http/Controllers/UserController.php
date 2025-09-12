@@ -66,6 +66,7 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
             'role' => 'required|string|in:customer,admin,super_admin',
+            'access_level' => 'required|integer',
             'password' => 'required|string|min:8',
         ]);
 
@@ -73,6 +74,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'access_level' => $request->access_level,
             'password' => Hash::make($request->password),
         ]);
 

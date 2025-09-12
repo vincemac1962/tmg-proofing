@@ -6,6 +6,11 @@
     <x-section-heading class="border-lime-700">
         Users - Index
     </x-section-heading>
+    @if (session('success'))
+        <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <!-- Combined Filter and Sort Form -->
     <form method="GET" action="{{ route('users.index') }}" id="filterForm" class="mb-4">

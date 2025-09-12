@@ -34,3 +34,19 @@
         </tbody>
     </table>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Success message auto-hide functionality
+            const successMessage = document.getElementById('successMessage');
+            console.log(successMessage); // Debugging
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    console.log('Success message hidden'); // Debugging
+                }, 5000); // 5000ms = 5 seconds
+            }
+        });
+    </script>
+@endpush

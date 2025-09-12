@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
             'name' => 'Liam Fogerty',
             'email' =>'liam@timemg.com',
             'password' => Hash::make('T1m3M3d1a'),
+            'access_level' => 1,
             ]);
 
         User::factory()->designer()->create([

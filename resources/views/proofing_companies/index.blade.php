@@ -6,13 +6,13 @@
 <x-section-heading class="border-rose-700">
     Proofing Companies - Index
 </x-section-heading>
+@if (session('success'))
+    <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="py-2">
-        @if(session('success'))
-            <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-                <strong class="font-bold">Success!</strong>
-                <span class="block sm:inline">{{ session('success') }}</span>
-            </div>
-        @endif
+        <!-- Show All Companies Checkbox -->
         <form method="GET" action="{{ route('proofing_companies.index') }}" class="flex flex-row items-center space-x-2">
             <label for="show_all" class="text-lg font-medium text-gray-700 dark:text-gray-100">Show All Companies</label>
             <input type="checkbox" id="show_all" name="show_all" value="1" onchange="this.form.submit()" {{ request('show_all') ? 'checked' : '' }}>
@@ -51,9 +51,13 @@
                 <a class="btn btn-primary text-red-800 hover:text-red-600" onclick="history.back()">Cancel</a>
             </div>
             <div class="col-span-3 text-center">
+                @if(Auth::check() && (int)Auth::user()->access_level >= 2)
                 <a href="{{ route('proofing_companies.create') }}" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
                     Create New Company
                 </a>
+                @else
+                    <span class="text-gray-400 cursor-not-allowed">Create New Company</span>
+                @endif
             </div>
     </div>
 @endsection

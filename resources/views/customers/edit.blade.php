@@ -151,16 +151,20 @@
                     </button>
                 </div>
     </form>
-                <div class="md:col-span-1 flex justify-center items-center">
-                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this customer?');" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-800 hover:text-red-600 pl-5">Delete</button>
-                    </form>
-                </div>
-            </div>
+    <div class="md:col-span-1 flex justify-center items-center">
+        @if (auth()->user()->access_level >= 2)
+            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this customer?');" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-800 hover:text-red-600 pl-5">Delete</button>
+            </form>
+        @else
+            <button type="button" class="text-gray-400 pl-5 cursor-not-allowed" disabled>Delete</button>
+        @endif
+    </div>
 
-            @if ($errors->any())
+
+    @if ($errors->any())
                 <div class="md:col-span-4">
                     <h2 class="text-red-600 font-bold">Please fix the following errors:</h2>
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">

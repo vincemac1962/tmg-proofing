@@ -108,9 +108,9 @@ class ActivityController extends Controller
         return redirect()->route('activities.job', ['id' => $activity->job_id])->with('success', 'Activity updated successfully.');
     }
 
-    public function destroy(Activity $activity)
+    public function destroy(Activity $activity, Request $request)
     {
         $activity->delete();
-        return redirect()->route('activities.index');
+        return redirect()->route('activities.job', ['id' => $request->input('proofingJob')])->with('success', 'Activity record deleted successfully.');
     }
 }

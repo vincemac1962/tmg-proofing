@@ -36,7 +36,8 @@ class ProofController extends Controller
 
     public function show(Proof $proof)
     {
-        return view('proofs.show', compact('proof'));
+        $customerId = $proof->proofingJob->customer_id;
+        return view('proofs.show', compact('proof', 'customerId'));
     }
 
     public function create($jobId, $customerId, Request $request)
@@ -231,14 +232,18 @@ class ProofController extends Controller
         return $this->sendProofEmail($proofId, 'proof resent');
     }
 
-    public function destroy(Proof $proof)
+    public function destroy($customerId, Proof $proof)
     {
-        Storage::disk('public')->delete($proof->file_path);
+        if ($proof->file_path && Storage::disk('public')->exists($proof->file_path)) {
+            Storage::disk('public')->delete($proof->file_path);
+        }
         $proof->delete();
 
-        return redirect()->route('proofs.index')
+        return redirect()->route('customers.show', ['customer' => $customerId])
             ->with('success', 'Proof deleted successfully.');
     }
+
+
 
     // ToDo: implement method to delete all proofing videos except most recent one
     public function deleteAllExceptMostRecent($jobId)

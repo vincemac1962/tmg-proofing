@@ -61,12 +61,16 @@
             <a class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5" href="{{ route('users.edit', $user->id) }}">Edit</a>
         </div>
         <div class="col-span-1">
-            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')"
-                        class="text-red-800 hover:text-red-600 pl-5">Delete</button>
-            </form>
+            @if(Auth::check() && (int)Auth::user()->access_level >= 2)
+                <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')"
+                            class="text-red-800 hover:text-red-600 pl-5">Delete</button>
+                </form>
+            @else
+                <span class="text-gray-400 cursor-not-allowed">Delete</span>
+            @endif
         </div>
         <div class="col-span-3"></div>
 

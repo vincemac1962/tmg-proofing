@@ -116,12 +116,16 @@
         <a href="{{ route('proofing_companies.edit', $proofingCompany) }}" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5">Edit</a>
     </div>
     <div class="col-span-2 text-center">
+        @if(Auth::check() && (int)Auth::user()->access_level >= 2)
         <form method="POST" action="{{ route('proofing_companies.destroy', $proofingCompany) }}">
             @csrf
             @method('DELETE')
             <button type="submit" class="text-red-800 hover:text-red-600 pl-5" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
         </form>
+        @else
+            <span class="text-gray-400 cursor-not-allowed">Delete</span>
+        @endif
     </div>
 
-    
+
 @endsection

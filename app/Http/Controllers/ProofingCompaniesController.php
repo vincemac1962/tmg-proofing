@@ -95,7 +95,7 @@ class ProofingCompaniesController extends Controller
             'web_url' => 'required|string|max:100',
             'email_signatory' => 'required|string|max:50',
             'signatory_role' => 'required|string|max:50',
-            'company_logo_url' => 'required|url|max:100',
+            'company_logo_url' => 'required|max:100',
             'colour_split' => 'required|string|max:25',
             'active' => 'boolean',
         ]);

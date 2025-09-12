@@ -69,9 +69,15 @@
                                 <x-dropdown-link :href="route('users.index')">
                                     {{ __('View Users') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('users.create')">
-                                    {{ __('Create Users') }}
-                                </x-dropdown-link>
+                                @if(Auth::check() && (int)Auth::user()->access_level >= 2)
+                                    <x-dropdown-link :href="route('users.create')">
+                                        {{ __('Create Users') }}
+                                    </x-dropdown-link>
+                                @else
+                                    <span class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 cursor-not-allowed">
+                                        {{ __('Create Users') }}
+                                    </span>
+                                @endif
                             </x-slot>
                         </x-dropdown>
                         <!-- Designers Dropdown -->
@@ -85,9 +91,15 @@
                                 <x-dropdown-link :href="route('designers.index')">
                                     {{ __('View Designers') }}
                                 </x-dropdown-link>
+                                @if(Auth::check() && (int)Auth::user()->access_level >= 2)
                                 <x-dropdown-link :href="route('designers.create')">
                                     {{ __('Add Designer') }}
                                 </x-dropdown-link>
+                                @else
+                                    <span class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 cursor-not-allowed">
+                                        {{ __('Add Designer') }}
+                                    </span>
+                                @endif
                             </x-slot>
                         </x-dropdown>
                         <!-- Proofing Companies Dropdown -->
@@ -101,9 +113,15 @@
                                 <x-dropdown-link :href="route('proofing_companies.index')">
                                     {{ __('View Companies') }}
                                 </x-dropdown-link>
+                                @if(Auth::check() && (int)Auth::user()->access_level >= 2)
                                 <x-dropdown-link :href="route('proofing_companies.create')">
                                     {{ __('Create Company') }}
                                 </x-dropdown-link>
+                                @else
+                                    <span class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 cursor-not-allowed">
+                                        {{ __('Create Company') }}
+                                    </span>
+                                @endif
                             </x-slot>
                         </x-dropdown>
                         <x-dropdown align="left" width="48" :active="request()->routeIs('reports.*')">
@@ -125,9 +143,16 @@
                                 </span>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('reports-maintenance.index')">
-                                    {{ __('View Reports') }}
-                                </x-dropdown-link>
+                                @if(Auth::user()->access_level == 3)
+                                    <x-dropdown-link :href="route('reports-maintenance.index')">
+                                        {{ __('View Reports') }}
+                                    </x-dropdown-link>
+                                @else
+                                    <span class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-400 dark:text-gray-400 cursor-not-allowed">
+                                        {{ __('View Reports') }}
+                                    </span>
+                                @endif
+
                             </x-slot>
                         </x-dropdown>
 

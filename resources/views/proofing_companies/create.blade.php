@@ -14,7 +14,7 @@
             <!-- first row -->
             <div class="mb-2 col-span-2">
                 <label for="name" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    Name
+                    Name<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -28,7 +28,7 @@
 
             <div class="md:col-span-4 mb-2">
                 <label for="address" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    Company Name
+                    Address
                 </label>
                 <input
                         type="text"
@@ -42,7 +42,7 @@
             <!-- second row -->
             <div class="md:col-span-2 mb-2">
                 <label for="telephone_1" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    City
+                    Telephone<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -55,7 +55,7 @@
 
             <div class="md:col-span-2 mb-2">
                 <label for="email_address" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    Email Address
+                    Email Address<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -68,7 +68,7 @@
 
             <div class="md:col-span-2 mb-2">
                 <label for="web_url" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    Web URL
+                    Web URL<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -81,7 +81,7 @@
             <!-- third row -->
             <div class="md:col-span-2 mb-2">
                 <label for="email_signatory" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    Email Signatory
+                    Email Signatory<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -94,7 +94,7 @@
 
             <div class="md:col-span-2 mb-4">
                 <label for="signatory_role" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 ">
-                    Signatory Role
+                    Signatory Role<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -109,7 +109,7 @@
             <!-- fourth row -->
             <div class="w-full md:col-span-2 mb-2">
                 <label for="company_logo_url" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
-                    Logo URL
+                    Logo URL<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -123,7 +123,7 @@
 
             <div class="w-full md:col-span-2 mb-2">
                 <label for="colour_split" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 ">
-                    Colour Split
+                    Colour Split<span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"

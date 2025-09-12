@@ -101,13 +101,16 @@
                 <a class="btn btn-primary text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400" href="{{ route('proofs.edit', $proof) }}">Edit</a>
             </div>
             <div class="col-span-1 text-center">
-                <form action="{{ route('proofs.destroy', $proof) }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                            class="btn btn-primary text-red-800 hover:text-red-600"
-                    >Delete</button>
-                </form>
+                @if(Auth::check() && (int)Auth::user()->access_level >= 2)
+                    <form action="{{ route('proofs.destroy', ['customerId' => $customerId, 'proof' => $proof->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-800 hover:text-red-600">Delete</button>
+                    </form>
+                @else
+                    <span class="text-gray-400 cursor-not-allowed">Delete</span>
+                @endif
+
             </div>
 
 
