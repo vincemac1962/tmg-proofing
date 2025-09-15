@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CustomerAmendmentMail;
 use App\Mail\CustomerLoginMail;
 use App\Models\Activity;
 use App\Models\Proof;
@@ -152,8 +153,10 @@ class ProofController extends Controller
                     ->withErrors(['error' => 'Customer or user information is missing for this proof.']);
             }
             //ToDo: handle case where proofing job is not found or has no status
-            if (is_null($activityType)) {
+            if (empty($_REQUEST['proof_type'])) {
                 $activityType = 'proof emailed';
+            } else {
+                $activityType = $_REQUEST['proof_type'];
             }
 
             // Retrieve the proofing company associated with the proofing job
@@ -179,7 +182,11 @@ class ProofController extends Controller
                 'logo' => $logo,
             ];
 
-            $mail = new CustomerLoginMail($data);
+
+            $mail = str_contains($activityType, 'amended')
+                ? new CustomerAmendmentMail($data)
+                : new CustomerLoginMail($data);
+
 
             // Prepare CC and BCC
             $cc = [];
@@ -187,7 +194,7 @@ class ProofController extends Controller
             if (!empty($additionalPocs)) {
                 $cc = array_map('trim', explode(',', $additionalPocs));
             }
-            $bcc = ['bcc@example.com']; // Hardcoded BCC address
+            $bcc = ['proofing@time-cdn.co.uk'];
 
             $email = Mail::to($data['recipient_email']);
             if (!empty($cc)) {
