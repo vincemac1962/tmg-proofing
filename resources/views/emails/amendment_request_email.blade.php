@@ -8,6 +8,6 @@
 </ul>
 
 <p><strong>Amendment Notes:</strong></p>
-<p>{{ $amendment_notes }}</p>
+<p>{{ $amendmentNotes }}</p>
 
 <p>Best regards,<br>Proofing Team</p>

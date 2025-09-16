@@ -1,5 +1,5 @@
 <!-- resources/views/components/company-footer.blade.php -->
-<<div class="flex flex-col items-center justify-center mt-12">
+<div class="flex flex-col items-center justify-center mt-12">
     <div>
         <img src="{{ Storage::url('public/images/' . $proofingCompany['company_logo_url']) }}" alt="Company Logo" style="max-height: 100px;">
     </div>

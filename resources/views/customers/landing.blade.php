@@ -41,6 +41,11 @@
     <div class="flex justify-center items-center mb-8">
         <img style="max-height: 12.5rem" src="{{ Storage::url('public/images/' . $proofingCompany->company_logo_url) }}" alt="Company Logo">
     </div>
+    @if (session('success'))
+        <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
         Welcome, {{ $user->name }}

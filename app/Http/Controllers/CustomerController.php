@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use getID3;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AmendmentRequestEmail;
+use App\Mail\ApprovalEmail;
 
 class CustomerController extends Controller
 {
@@ -56,6 +58,7 @@ class CustomerController extends Controller
 
         return view('customers.index', compact('customers', 'countries'));
     }
+
     // Collect list of countries from the customers table
     public function getCountries()
     {
@@ -108,7 +111,6 @@ class CustomerController extends Controller
             'password' => Hash::make($request->customer_password), // Hash the password
             'role' => 'customer',
         ]);
-
 
 
         $customer = Customer::create([
@@ -284,7 +286,7 @@ class CustomerController extends Controller
 
         $proofingCompanyArray = $proofingCompany->toArray();
 
-        return view('customers.view_proof', compact('proofingJob',  'proofingCompany', 'proofingCompanyArray', 'latestProof', 'videoDimensions', 'user'));
+        return view('customers.view_proof', compact('proofingJob', 'proofingCompany', 'proofingCompanyArray', 'latestProof', 'videoDimensions', 'user'));
     }
 
     public function submitAmendment(Request $request)
@@ -325,13 +327,19 @@ class CustomerController extends Controller
             'amendment_notes' => $request->amendment_notes,
             'proofingJob' => $proofingJob,
         ];
-        // Send the email
-        Mail::send('emails.amendment_email', $data, function ($message) use ($recipients, $subject) {
-            $message->to($recipients)
-                ->subject($subject);
-        });
+        //  queue the email
+        // Mail::send('emails.amendment_email', $data, function ($message) use ($recipients, $subject) {
+        //    $message->to($recipients)
+        //        ->subject($subject)->bcc('vince.macrae@gmail.com');
+        //});
 
-        return redirect()->route('customers.landing')->with('success', 'Amendment submitted successfully.');
+        Mail::to($recipients)
+            ->bcc('vince.macrae@gmail.com')
+            ->queue(new AmendmentRequestEmail($proofingJob, $request->amendment_notes, $subject));
+
+
+
+        return redirect()->route('customers.landing')->with('success', 'Your amendments have been submitted successfully. A revised proof will be prepared and emailed to you.');
     }
 
     public function submitApproval(Request $request)
@@ -373,13 +381,12 @@ class CustomerController extends Controller
             'approved_at' => now()->format('H:i:s d-m-Y'),
         ];
 
-        // Send the email
-        Mail::send('emails.approval_email', $data, function ($message) use ($recipients, $subject) {
-            $message->to($recipients)
-                ->subject($subject);
-        });
+        // Queue the email
+        Mail::to($recipients)
+            ->queue(new ApprovalEmail($proofingJob, $request->approved_by, $data['approved_at'], $subject));
 
-        return redirect()->route('customers.landing')->with('success', 'Advertisement approved successfully.');
+
+        return redirect()->route('customers.landing')->with('success', 'Thank you for your approval. This has been sent to our scheduling department who will send your advertisement live at your chosen site(s) at the next available update.');
     }
 
     public function downloadProof($id)

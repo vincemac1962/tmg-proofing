@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\Log;
         return $this->view('emails.customer_amendment')
             ->text('emails.customer_amendment_plain')
             ->replyTo($this->proofingCompany->email_address)
-            ->subject('Your Amended Advertisement')
+            ->subject($this->subject)
             ->attach(public_path('storage/images/' . $this->logo), [
                 'as' => $this->logo,
                 'mime' => 'image/svg+xml',

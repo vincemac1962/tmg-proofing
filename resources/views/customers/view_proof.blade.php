@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Proof</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 <body class="bg-gray-100 dark:bg-gray-800">
 <div class="flex justify-end items-center p-4">
@@ -52,20 +53,38 @@
 
         @if ($latestProof)
             <div class="mb-8">
-                <div class="aspect-w-16 aspect-h-9 mb-4">
-                    <video class="w-full rounded-lg shadow-sm" controls>
-                        <source src="{{ asset('storage/'. $latestProof->file_path) }}" type="video/mp4">
-                    </video>
+                <div class="aspect-w-16 aspect-h-9 mb-4 flex justify-center">
+                    <div x-data="{ playing: false }" class="relative aspect-w-16 aspect-h-9 mb-4 flex justify-center">
+                        <video
+                            class="w-full max-h-[90vh] rounded-lg shadow-sm"
+                            controls
+                            @play="playing = true"
+                            @pause="playing = false"
+                            x-ref="video"
+                        >
+                            <source src="{{ asset('storage/'. $latestProof->file_path) }}" type="video/mp4">
+                        </video>
+                        <button
+                            x-show="!playing"
+                            @click="$refs.video.play()"
+                            class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-lg transition"
+                            style="pointer-events: auto;"
+                            aria-label="Play video"
+                        >
+                            <svg class="w-20 h-20 text-white opacity-80" fill="currentColor" viewBox="0 0 84 84">
+                                <circle cx="42" cy="42" r="42" fill="currentColor" opacity="0.4"/>
+                                <polygon points="34,28 62,42 34,56" fill="white"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex flex-row justify-center items-center gap-4 text-center">
+                <div class="flex flex-col items-center">
                     <a href="{{ asset('storage/' . $latestProof->file_path) }}" target="_blank"
                        class="inline-flex items-center text-blue-800 hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
-                        Open Full Screen
-                    </a>
-                    <a href="{{ route('proofs.download', $proofingJob->id) }}" download
-                       class="inline-flex items-center text-blue-800 hover:text-blue-400 dark:text-gray-200 dark:hover:text-gray-400 text-lg leading-5">
-                        Download Video
-                    </a>
+                        Open Full Screen</a>
+                        <p class="text-gray-600 dark:text-gray-100 text-xs mb-2">[Opens in new window]</p>
+
+
                 </div>
             </div>
         @endif
@@ -77,9 +96,12 @@
             <div class="space-y-8">
                 <div>
                     <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-300 mb-4">Submit Amendment</h1>
-                    <p class="text-gray-700 dark:text-gray-300 mb-5">Please enter any amendment notes below and click "Submit Amendment". For more extensive changes, or to email content or files
+                    <div class="text-gray-700 dark:text-gray-300 mb-5">
+                    <p class="text-gray-700 dark:text-gray-300 mb-5">Please enter any amendment notes below and click "Submit Amendment". </p>
+                    <p>For more extensive changes or to send us additonal content or files
                         <a class="text-red-800 hover:text-red-400 dark:text-red-200 dark:hover:text-red-800" href="mailto:{{ $proofingCompany->email_address }}">please email our design team</a>
                     </p>
+                    </div>
                     <form action="{{ route('customers.submit_amendment') }}" method="POST" class="space-y-4">
                         @csrf
                         <textarea class="w-full h-32 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -90,7 +112,7 @@
                         <input type="hidden" name="proofing_job_id" value="{{ $proofingJob->id }}">
                         <input type="hidden" name="customer_id" value="{{ $proofingJob->customer_id }}">
                         <input type="hidden" name="contract_reference" value="{{ $proofingJob->contract_reference }}">
-                        <button type="submit" class="text-blue-800 hover:text-blue-400 text-white font-medium py-2 px-4 rounded-md">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md">
                             Submit Amendment
                         </button>
                     </form>
@@ -100,7 +122,9 @@
                     <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-300 mb-4 mt-5">Approve Advertisement</h1>
                     <p class="text-gray-700 dark:text-gray-300 mb-5">If you are happy with the advertisement as it is, please enter your name below and click "Approve Advertisement".
                         This will notify our team to proceed with displaying your advert at the chosen location(s).
-                        <strong>Please note:</strong> that once approved, no further changes can be made unless you contact our design team directly.
+                        <strong>Please note:</strong> that once approved, no further changes can be made unless you contact our design team directly.</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-5">If you would like to download a copy of your advert for your records, please <a href="{{ route('proofs.download', $proofingJob->id) }}"
+                        class="text-red-800 hover:text-red-400 dark:text-red-200 dark:hover:text-red-800"> click here.</a>
                     </p>
                     <form action="{{ route('customers.submit_approval') }}" method="POST" class="space-y-4"
                           onsubmit="return confirm('Are you sure you want to approve this advertisement?');">
