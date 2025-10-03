@@ -143,7 +143,8 @@
         @else
             <div class="text-gray-600 dark:text-gray-100 mb-4 text-center">
                 This proof has already been approved. Please
-                <a href="mailto:email@example.com?subject=New proof required for {{ $proofingJob->contract_reference }} - {{ $proofingJob->customer->company_name }}"
+                "mailto:"
+                <a href="mailto:{{ $proofingCompany->email_address }}?subject=New proof required for {{ $proofingJob->contract_reference }} - {{ $proofingJob->customer->company_name }}"
                    class="text-blue-800 hover:text-blue-400 dark:text-red-200 dark:hover:text-gray-400">click here</a> to email the proofing team.
             </div>
         @endif

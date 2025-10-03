@@ -9,6 +9,7 @@ config/app.php
 .env
 .env.backup
 .env.production
+.env.mail_safe
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
