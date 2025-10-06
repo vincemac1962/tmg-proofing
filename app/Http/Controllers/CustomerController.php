@@ -241,10 +241,19 @@ class CustomerController extends Controller
         return view('customers.landing', compact('user', 'customers', 'proofingCompany', 'proofingCompanyArray'));
     }
 
+
+
     public function viewProof($id)
     {
-        // get the current user
         $user = auth()->user();
+
+        // Retrieve the proofing job and its customer
+        $proofingJob = ProofingJob::with('customer', 'proofingCompany')->findOrFail($id);
+
+        // Ownership check: only allow if the job belongs to the logged-in customer
+        if (!$proofingJob->customer || $proofingJob->customer->user_id !== $user->id) {
+            abort(403, 'Unauthorized access to this proof.');
+        }
 
         // Retrieve the most recent proof for the given proofing_jobs.id
         $latestProof = Proof::where('job_id', $id)->latest()->first();
@@ -252,8 +261,6 @@ class CustomerController extends Controller
         if (!$latestProof) {
             abort(404, 'No proof found for the given job.');
         }
-
-        $proofingJob = ProofingJob::with('customer', 'proofingCompany')->findOrFail($id);
 
         $videoDimensions = null;
 
@@ -276,18 +283,18 @@ class CustomerController extends Controller
         // Add a record to the activities table
         Activity::create([
             'job_id' => $proofingJob->id,
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'activity_type' => 'proof viewed',
             'ip_address' => $_SERVER['REMOTE_ADDR'],
             'notes' => null,
         ]);
 
         $proofingCompany = $proofingJob->proofingCompany;
-
         $proofingCompanyArray = $proofingCompany->toArray();
 
         return view('customers.view_proof', compact('proofingJob', 'proofingCompany', 'proofingCompanyArray', 'latestProof', 'videoDimensions', 'user'));
     }
+
 
     public function submitAmendment(Request $request)
     {
