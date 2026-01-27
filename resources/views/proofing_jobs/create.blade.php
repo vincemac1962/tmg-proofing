@@ -56,7 +56,7 @@
         </div>
         <!-- fourth row -->
         <div class="w-full col-span-1 py-2">
-            <label for="contract_reference" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Contract Reference:  <span class="text-red-500">*</span></label>
+            <label for="contract_reference" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Proofing Contract Reference:  <span class="text-red-500">*</span></label>
             <input
                     type="text"
                     id="contract_reference"
