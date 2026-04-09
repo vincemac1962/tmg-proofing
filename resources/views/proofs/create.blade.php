@@ -26,7 +26,7 @@
         <div class="w-full col-span-2 px-6">
             <label for="notes"
             class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
-            Notes:</label>
+            Notes to Customer:</label>
             <textarea name="notes"
                       class="col-span-1 w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                       id="notes"></textarea></div>

@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|string|in:customer,admin,super_admin',
+            'role' => 'required|string|in:customer,admin,designer',
             'access_level' => 'required|integer',
             'password' => 'required|string|min:8',
         ]);
@@ -92,7 +92,7 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-                'role' => 'required|string|in:customer,admin,super_admin',
+                'role' => 'required|string|in:customer,admin,designer',
                 'password' => 'nullable|string|confirmed|min:8',
             ]);
             // Update the user

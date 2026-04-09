@@ -138,7 +138,8 @@
                 @if($proofCount  >= 1)
                     <form action="{{ route('proofs.resendProofEmail', ['proof' => $proofingJob->proofs->last()->id]) }}"
                           method="POST"
-                          style="display: inline;">
+                          style="display: inline;"
+                          onsubmit="return confirm('Are you sure you want to resend the last proof/amendment?');">
                         @csrf
                         <button type="submit"
                                 class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400 pl-5"

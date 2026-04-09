@@ -27,7 +27,7 @@ class ApprovalEmail extends Mailable
 
     public function build()
     {
-        return $this->subject($this->subject)
+        return $this->subject('Proof Approval Received - ' . $this->proofingJob->contract_reference)
             ->view('emails.approval_email')
             ->with([
                 'proofingJob' => $this->proofingJob,

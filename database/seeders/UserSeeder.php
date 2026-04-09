@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
 
         // Create admin users
         User::factory()->admin()->create([
-            'name' => 'Hannah Dunn',
+            'name' => 'Design Department',
             'email' => 'design@timemg.com',
             'password' => Hash::make('T1m3M3d1a'),
             'access_level' => 2,

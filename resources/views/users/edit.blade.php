@@ -15,7 +15,7 @@
             <!-- first row -->
            <div class="md:col-span-2 mb-2">
                 <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
-                    Name
+                    Name <span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -28,7 +28,7 @@
             </div>
             <div class="md:col-span-2 mb-2">
                 <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
-                    Email
+                    Email <span class="text-red-500">*</span>
                 </label>
                 <input
                         type="email"
@@ -42,7 +42,7 @@
             <!-- second row -->
             <div class="md:col-span-4 mb-2">
                 <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
-                    Password
+                    Password <span class="text-red-500">*</span>
                 </label>
                 <input
                         type="text"
@@ -57,7 +57,7 @@
             </div>
         <!-- third row -->
         <div class="md:col-span-2 mb-2">
-            <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Role:</label>
+            <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Role: <span class="text-red-500">*</span></label>
             <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 text-gray-900 dark:text-gray-100" id="role" name="role" required>
                 <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                 <option value="customer" {{ $user->role == 'customer' ? 'selected' : '' }}>Customer</option>
@@ -66,14 +66,13 @@
             </select>
         </div>
             <div class="col-span-2">
-                <label for="access_level" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Access Level: </label>
+                <label for="access_level" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Access Level: <span class="text-red-500">*</span></label>
                 @auth
                     @if (auth()->user()->access_level >= 2)
                 <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 text-gray-900 dark:text-gray-100" id="access_level" name="access_level" required>
                     <option value="0" {{ $user->access_level == '0' ? 'selected' : '' }}>Customer Level Access</option>
                     <option value="1" {{ $user->access_level == '1' ? 'selected' : '' }}>Data Entry & Basic Admin</option>
                     <option value="2" {{ $user->access_level == '2' ? 'selected' : '' }}>Creation & Deletion</option>
-                    <option value="3" {{ $user->access_level == '3' ? 'selected' : '' }}>Super Admin</option>
                 </select>
                     @else
                         <span class="text-gray-500">Restricted Field</span>
@@ -81,7 +80,7 @@
                 @endauth
             </div>
             <div class="md:col-span-4 mb-2 items-center text-center">
-                <label for="is_active" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Active?:</label>
+                <label for="is_active" class="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Active?: </label>
                 <!-- Hidden input to send false value -->
                 <input type="hidden" name="is_active" value="0">
                 <!-- Checkbox to send true value -->
@@ -96,6 +95,7 @@
                 <button type="submit" class="text-blue-800 hover:text-blue-600 dark:text-gray-100 dark:hover:text-gray-400">
                     Save
                 </button>
+            </form>
                 @auth
                     @if (auth()->user()->access_level >= 2)
                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
@@ -115,7 +115,6 @@
 
 
 
-        </form>
 
     @if ($errors->any())
         <div>
