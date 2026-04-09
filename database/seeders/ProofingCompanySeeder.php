@@ -78,7 +78,11 @@ class ProofingCompanySeeder extends Seeder
         ];
 
         foreach ($companies as $company) {
-            ProofingCompany::create($company);
+            ProofingCompany::updateOrCreate(
+                ['name' => $company['name']],
+                $company
+            );
+
         }
     }
 }

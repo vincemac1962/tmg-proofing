@@ -10,7 +10,7 @@ class CreateProofingCompaniesTableNewMigration extends Migration
     {
         Schema::create('proofing_companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
+            $table->string('name', 50)->unique();
             $table->string('address', 100)->nullable();
             $table->string('telephone_1', 75);
             $table->string('telephone_2', 75)->nullable();
